@@ -1,0 +1,26 @@
+---
+import Telegram from "../icons/Telegram.astro";
+import Phone from "../icons/Phone.astro";
+import Logo from "../icons/Logo.astro";
+import Burger from "../icons/Burger.astro";
+import MobileMenu from "./MobileMenu.astro";
+
+const response = await fetch(`http://localhost:1337/api/navigation/render/mobile-menu?type=TREE`);
+const data = await response.json();
+---
+
+<header class="mpp-header-mobile">
+    <div class="container mpp-header-mobile-wrap">
+        <div class="mpp-contacts">
+            <a class="mpp-contacts-icon">
+                <Telegram />
+            </a>
+            <a class="mpp-contacts-icon">
+                <Phone />
+            </a>
+        </div>
+        <Logo />
+        <Burger />
+        <MobileMenu />
+    </div>
+</header>

@@ -1,0 +1,101 @@
+---
+import Logo from '../icons/Logo.astro'
+import Cart from '../icons/Cart.astro'
+
+const response = await fetch(`http://localhost:1337/api/navigation/render/desktop-menu?type=TREE`);
+const data = await response.json();
+---
+
+
+<header class="mpp-header-desktop">
+    <nav class="mpp-header-desktop-wrap container">
+        <ul>
+            {
+                data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
+                    item.position === "left" &&
+                    <li>
+                        <a href={item.path}>{item.title}</a>
+                            {
+                                item.items && 
+                                    <ul class="mpp-main-mobile-menu-list-lvl-2">
+                                    {
+                                        item.items.map( (_item: { path: string | URL; title: unknown; }) =>
+                                            <li>
+                                                <a href={_item.path}>{ _item.title }</a>
+                                            </li>
+                                        )
+                                    }
+                                </ul>  
+                            }
+                    </li> 
+                )
+            }
+        </ul>
+        <ul>
+            <ul>
+                {
+                    data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
+                        item.position === "right" &&
+                        <li>
+                            <a href={item.path}>{item.title}</a>
+                                {
+                                    item.items && 
+                                        <ul class="mpp-main-mobile-menu-list-lvl-2">
+                                        {
+                                            item.items.map( (_item: { path: string | URL; title: unknown; }) =>
+                                                <li>
+                                                    <a href={_item.path}>{ _item.title }</a>
+                                                </li>
+                                            )
+                                        }
+                                    </ul>  
+                                }
+                        </li> 
+                    )
+                }
+            </ul>
+        </ul>
+        <Logo />
+        <div>
+            <ul class="mpp-header-desktop-contacts">
+                <li><a href="tel:88007750861"></a></li>
+                <li><a href="support@myphotopages.ru"></a></li>
+            </ul>
+            <div>
+                <a href="/">Войти</a>
+                <a href="/cart">
+                    <Cart />
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<style is:global>
+    .mpp-header-desktop {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.mpp-header-desktop-wrap {
+    display: grid;
+    grid-template-columns: 5fr 3fr;
+    gap: 1.5em;
+}
+
+.mpp-header-desktop-wrap ul {
+    display: flex;
+    gap: 1em;
+}
+
+.mpp-header-desktop-wrap li {
+    font-size: .625rem;
+}
+
+.mpp-header-desktop-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+</style>

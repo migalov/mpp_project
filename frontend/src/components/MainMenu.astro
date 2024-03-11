@@ -1,0 +1,18 @@
+---
+const response = await fetch(`http://localhost:1337/api/navigation/render/default-menu?type=TREE`);
+const data = await response.json();
+---
+
+<header class="mpp-main-menu">
+    <nav class="mpp-main-menu-wrapper container">
+        <ul class="mpp-main-menu-list-lvl-1">
+            {
+                data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
+                <li class="mpp-main-menu-item-lvl-1">
+                    <a href={item.path}>{item.title}</a>
+                </li>
+                )
+            }
+        </ul>
+    </nav>
+</header>

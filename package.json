@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "strapi-plugin-email-designer": "^2.2.1",
+    "strapi-plugin-menus": "^1.6.1"
+  }
+}
