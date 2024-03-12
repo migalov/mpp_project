@@ -1,6 +1,7 @@
 ---
-const response = await fetch(`http://localhost:1337/api/navigation/render/default-menu?type=TREE`);
+const response = await fetch(`http://localhost:1337/api/navigation/render/main-menu?type=TREE`);
 const data = await response.json();
+
 ---
 
 <header class="mpp-main-menu">
@@ -10,9 +11,154 @@ const data = await response.json();
                 data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
                 <li class="mpp-main-menu-item-lvl-1">
                     <a href={item.path}>{item.title}</a>
+                    {
+
+                        item.items &&
+                        <div class="mpp-main-menu-dropdown-lvl-2">
+                            <ul class="container">
+                            {
+                                item.items.map( _item => 
+                                    <li class="mpp-main-menu-item-lvl-2">
+                                        <a href={_item.path}>{_item.title}</a>
+                                        <div class="mpp-main-menu-dropdown-previews">
+                                            {
+                                                _item.items && _item.items.map( __item =>
+                                                    __item.path !== "#" ? <a href={__item.path}>
+                                                        <figure class="mpp-main-menu-dropdown-preview">
+                                                            <img src={__item.preview} />
+                                                            <figcaption
+                                                                class={`mpp-main-menu-dropdown-preview__title mpp-main-menu-dropdown-preview__title--${__item.color}`}
+                                                            >
+                                                                {__item.title}
+                                                            </figcaption>
+                                                        </figure>
+                                                    </a> : <img height="300" src={__item.preview} />
+                                                )
+                                            }
+                                        </div>
+                                    </li>
+                                )
+                            }
+                            </ul>
+                        </div>
+                    }
+                    
                 </li>
                 )
             }
         </ul>
     </nav>
 </header>
+
+
+<style is:global lang="scss">
+    .mpp-main-menu {
+        background: #FFFFFF;
+        position: relative;
+        @media (max-width: 768px) {
+            position: fixed;
+            top: 4em;
+            left: 0;
+            right: 0;
+        }
+
+    }
+    .mpp-main-menu-list-lvl-1 {
+
+    }
+    .mpp-main-menu-item-lvl-1 {
+        font-weight: 600;
+        padding: 1em 0;
+        @media (min-width: 768px) {
+            &:hover .mpp-main-menu-dropdown-lvl-2 {
+                display: block;
+            } 
+        }
+        & > a {
+            white-space: nowrap;
+            font-size: .75em;
+        }
+    }
+    .mpp-main-menu-dropdown-lvl-2 {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        box-shadow: 0 11px 13px 0 rgba(0, 0, 0, 0.15);
+        padding: 1em 0;
+        display: none;
+        background: #FFFFFF;
+    }
+    .mpp-main-menu-dropdown-lvl-2 ul {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    .mpp-main-menu-item-lvl-2 {
+        & > a {
+            padding: .5em .25em;
+            margin: 0 -0.25em;
+            display: inline-block;
+            &:hover {
+                background: #e5e5e5;
+            }
+        }
+        &:hover .mpp-main-menu-dropdown-previews {
+            display: flex;
+        }
+    }
+    .mpp-main-menu-dropdown-previews {
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        top: 0;
+        width: min(calc(600px + 2em), 50%);
+        display: none;
+        gap: 1.5em;
+    }
+    .mpp-main-menu-dropdown-preview {
+        flex: 1;
+        position: relative;
+        height: 300px;
+        border-radius: 1em;
+        overflow: hidden;
+        & img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        & figcaption {
+            position: absolute;
+            top: 1em;
+            left: 1em;
+            right: 1em;
+            font-size: .75rem;
+            font-weight: 500;
+            width: min(300px, 80%);
+        }
+    }
+
+    .mpp-main-menu-dropdown-preview__title--white {
+        color: #FFFFFF;
+    }
+    .mpp-main-menu-dropdown-preview__title--black {
+        color: #000000;
+    }
+</style>
+
+<script>
+    const itemsMainMenu = document.querySelectorAll(".mpp-main-menu-item-lvl-2");
+    
+    const resizeDesktopDropdownMenu = () => {
+        itemsMainMenu.forEach(el => {
+            el.addEventListener("mouseover", () => {
+                let dropdownMenu = el.querySelector('.mpp-main-menu-dropdown-previews');
+                let dropdownMenuHeight = dropdownMenu.offsetHeight;
+                console.log(dropdownMenuHeight);
+                dropdownMenu.closest('.mpp-main-menu-dropdown-lvl-2').style.minHeight = `calc(${dropdownMenuHeight}px + 3em)`;
+            });
+        })
+    }
+    resizeDesktopDropdownMenu();
+    window.onresize = () => resizeDesktopDropdownMenu();
+</script>

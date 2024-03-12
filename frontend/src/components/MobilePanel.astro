@@ -1,0 +1,63 @@
+---
+import Home from "./icons/nav-mobile/Home.astro";
+import Products from "./icons/nav-mobile/Products.astro";
+import Cabinet from "./icons/nav-mobile/Cabinet.astro";
+import Cart from "./icons/nav-mobile/Cart.astro";
+
+const response = await fetch(`http://localhost:1337/api/navigation/render/mobile-bottom-navigation`);
+const data = await response.json();
+---
+
+<nav class="mpp-bottom-nav-panel">
+    <ul class="container">
+        {
+            data.map(item =>
+                <>
+                    <li>
+                        <a href={item.path}>
+                            <div set:html={item.preview} />
+                            <span>{item.title}</span>
+                        </a>
+                    </li>
+                </>
+            )
+        }
+    </ul>
+</nav>
+
+<style is:global lang="scss">
+.mpp-bottom-nav-panel {
+    background: #FFFFFF;
+    position: fixed;
+    background-color: #FFFFFF;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+
+.mpp-bottom-nav-panel {
+    & ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em 2em;
+    }
+    & li {
+        text-align: center;
+        &:hover svg {
+            & rect, & path {
+                stroke: #F3704E;
+            }
+        }
+    }
+
+    & a {
+        font-size: .75rem;
+        font-weight: 600;
+    }
+
+}
+</style>

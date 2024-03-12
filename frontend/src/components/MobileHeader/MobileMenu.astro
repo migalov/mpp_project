@@ -1,4 +1,5 @@
 ---
+import Arrow from "../icons/Arrow.astro";
 const response = await fetch(`http://localhost:1337/api/navigation/render/mobile-menu?type=TREE`);
 const data = await response.json();
 ---
@@ -10,11 +11,9 @@ const data = await response.json();
                     <a href={item.path}>{item.title}</a>
                         {
                             item.items && 
-                            <input id={`dropdown-list-${item.index}`} class="mpp-main-mobile-toggle" type="checkbox" checked="checked" value="" />
+                            <input id={`dropdown-list-${item.index}`} class="mpp-main-mobile-toggle" type="checkbox" value="" />
                             <label for={`dropdown-list-${item.index}`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none">
-                                    <path d="M1 1L6 6L11 1" stroke="black" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                                <Arrow />
                             </label>
                             <ul class="mpp-main-mobile-menu-list-lvl-2">
                             {
@@ -32,16 +31,18 @@ const data = await response.json();
     </ul>
 </nav>
 
-<style is:global>
+<style is:global lang="scss">
 .logo {
     margin: 0 11vw 0 0;
 }
 
 .mpp-header-mobile {
+    background: #FFFFFF;
     position: relative;
     padding: .6rem 0;
     font-size: .75em;
     font-weight: 600;
+    z-index: 1;
     @media (min-width: 768px) {
         display: none;
     }
@@ -55,6 +56,11 @@ const data = await response.json();
 
 .mpp-contacts-icon {
     display: block;
+
+    & svg {
+        box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+        border-radius: 15px;
+    }
 }
 
 .mpp-header-mobile-wrap {
@@ -69,17 +75,20 @@ const data = await response.json();
 }
 
 .mpp-main-menu-wrapper {
-    position: relative;
+    /* position: relative; */
     padding: .5em 0;
-    overflow-x: auto;
-    & a {
-        white-space: nowrap;
+
+    @media (max-width:768px) {
+        overflow-x: auto;
     }
 }
 
 .mpp-main-menu-list-lvl-1 {
     display: flex;
     gap: 1.5em;
+    & > a {
+        white-space: nowrap;
+    }
 }
 
 .mpp-main-mobile-menu {
@@ -90,6 +99,7 @@ const data = await response.json();
     right: 0;
     background: #fff;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    z-index: 1;
 
     & ul {
         display: flex;

@@ -1,6 +1,9 @@
 ---
 import Logo from '../icons/Logo.astro'
-import Cart from '../icons/Cart.astro'
+import CartButton from '../icons/CartButton.astro'
+import Arrow from '../icons/Arrow.astro';
+import Phone from '../icons/nav-desktop/Phone.astro';
+import Mail from '../icons/nav-desktop/Mail.astro';
 
 const response = await fetch(`http://localhost:1337/api/navigation/render/desktop-menu?type=TREE`);
 const data = await response.json();
@@ -9,15 +12,16 @@ const data = await response.json();
 
 <header class="mpp-header-desktop">
     <nav class="mpp-header-desktop-wrap container">
-        <ul>
+        <ul class="mpp-header-desktop-menu-top-left">
             {
                 data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
                     item.position === "left" &&
-                    <li>
+                    <li class="mpp-main-desktop-menu-item-lvl-1">
                         <a href={item.path}>{item.title}</a>
                             {
                                 item.items && 
-                                    <ul class="mpp-main-mobile-menu-list-lvl-2">
+                                    <Arrow />
+                                    <ul class="mpp-main-desktop-menu-list-lvl-2">
                                     {
                                         item.items.map( (_item: { path: string | URL; title: unknown; }) =>
                                             <li>
@@ -31,71 +35,190 @@ const data = await response.json();
                 )
             }
         </ul>
-        <ul>
-            <ul>
-                {
-                    data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
-                        item.position === "right" &&
-                        <li>
-                            <a href={item.path}>{item.title}</a>
-                                {
-                                    item.items && 
-                                        <ul class="mpp-main-mobile-menu-list-lvl-2">
-                                        {
-                                            item.items.map( (_item: { path: string | URL; title: unknown; }) =>
-                                                <li>
-                                                    <a href={_item.path}>{ _item.title }</a>
-                                                </li>
-                                            )
-                                        }
-                                    </ul>  
-                                }
-                        </li> 
-                    )
-                }
-            </ul>
+        <ul class="mpp-header-desktop-menu-top-right">
+            {
+                data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
+                    item.position === "right" &&
+                    <li class="mpp-main-desktop-menu-item-lvl-1">
+                        <a href={item.path}>{item.title}</a>
+                            {
+                                item.items && 
+                                    <Arrow />
+                                    <ul class="mpp-main-desktop-menu-list-lvl-2">
+                                    {
+                                        item.items.map( (_item: { path: string | URL; title: unknown; }) =>
+                                            <li>
+                                                <a href={_item.path}>{ _item.title }</a>
+                                            </li>
+                                        )
+                                    }
+                                </ul>  
+                            }
+                    </li> 
+                )
+            }
         </ul>
-        <Logo />
-        <div>
+        <Logo class:list={['mpp-header-desktop-menu-bottom-left', 'logo']} />
+        <div class="mpp-header-desktop-menu-bottom-right">
             <ul class="mpp-header-desktop-contacts">
-                <li><a href="tel:88007750861"></a></li>
-                <li><a href="support@myphotopages.ru"></a></li>
+                <li><a href="tel:88007750861"><Phone /> 8 (800) 775 08 61</a></li>
+                <li><a href="support@myphotopages.ru"><Mail /> support@myphotopages.ru</a></li>
             </ul>
-            <div>
-                <a href="/">Войти</a>
-                <a href="/cart">
-                    <Cart />
+            <div class="mpp-header-desktop-user-actions">
+                <a class="mpp-header-desktop-btn-login" href="/">Войти</a>
+                <a class="mpp-header-desktop-btn-cart" href="/cart">
+                    <CartButton />
                 </a>
             </div>
         </div>
     </nav>
 </header>
 
-<style is:global>
+<style is:global lang="scss">
     .mpp-header-desktop {
-    @media (max-width: 768px) {
-        display: none;
+        background: #FFFFFF;
+        padding: 1rem 0 0;
+        @media (max-width: 768px) {
+            display: none;
+        }
+
+        & .logo {
+            margin: 0.4em 0 0.1em;
+        }
     }
-}
 
 .mpp-header-desktop-wrap {
     display: grid;
-    grid-template-columns: 5fr 3fr;
-    gap: 1.5em;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "tl tr" "bl br";
 }
 
-.mpp-header-desktop-wrap ul {
+.mpp-header-desktop-menu-top-left {
+    grid-area: tl;
+}
+
+.mpp-header-desktop-menu-top-right {
+    grid-area: tr;
+    justify-content: flex-end;
+}
+
+.mpp-header-desktop-menu-borrom-left {
+    grid-area: bl;
+}
+
+.mpp-header-desktop-menu-bottom-right {
+    grid-area: br;
     display: flex;
-    gap: 1em;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    top: -5px;
+
+
 }
 
-.mpp-header-desktop-wrap li {
+.mpp-header-desktop-wrap > ul {
+    display: flex;
+    flex-direction: row;
+    gap: 2.6em;
+}
+
+.mpp-header-desktop-wrap svg {
+    grid-area: bl;
+}
+
+.mpp-header-desktop-wrap li > a {
     font-size: .625rem;
+}
+
+.mpp-main-desktop-menu-item-lvl-1 {
+    position: relative;
+    padding: 0 0 1em;
+    margin: 0 0 -0.8em;
+
+    & svg {
+        margin: 0 0 0 .2em;
+        width: 6px;
+    }
+
+    &:hover {
+        & .mpp-main-desktop-menu-list-lvl-2 {
+            display: flex;
+        }
+    }
+}
+
+
+
+.mpp-main-desktop-menu-list-lvl-2 {
+    position: absolute;
+    top: 2em;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+    min-width: 200px;
+    z-index: 1;
+    background: #FFFFFF;
+    overflow: hidden;
+
+    & li {
+        font-size: .75rem;
+        font-weight: 500;
+
+        &:hover {
+            background-color: #E8E8E8;
+        }
+
+        & a {
+            display: block;
+            padding: 1em;
+        }
+    }
+}
+
+.mpp-main-desktop-menu-list-lvl-2 {
+
 }
 
 .mpp-header-desktop-contacts {
     display: flex;
     flex-direction: column;
     align-items: start;
+    gap: .7em;
+
+    & a {
+        display: flex;
+        align-items: center;
+        gap: .5em;
+    }
+}
+
+.mpp-header-desktop-btn-login {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    min-width: 90px;
+    height: 23px;
+    border: 1px solid #000;
+    border-radius: 1em;
+    font-size: .625rem;
+}
+
+.mpp-header-desktop-btn-cart {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+}
+
+.mpp-header-desktop-user-actions {
+    display: flex;
+    align-items: center;
+    gap: 9px;
 }
 </style>
