@@ -15,31 +15,54 @@ const data = await response.json();
 
                         item.items &&
                         <div class="mpp-main-menu-dropdown-lvl-2">
-                            <ul class="container">
-                            {
-                                item.items.map( _item => 
-                                    <li class="mpp-main-menu-item-lvl-2">
-                                        <a href={_item.path}>{_item.title}</a>
-                                        <div class="mpp-main-menu-dropdown-previews">
-                                            {
-                                                _item.items && _item.items.map( __item =>
-                                                    __item.path !== "#" ? <a href={__item.path}>
-                                                        <figure class="mpp-main-menu-dropdown-preview">
-                                                            <img src={__item.preview} />
-                                                            <figcaption
-                                                                class={`mpp-main-menu-dropdown-preview__title mpp-main-menu-dropdown-preview__title--${__item.color}`}
-                                                            >
-                                                                {__item.title}
-                                                            </figcaption>
-                                                        </figure>
-                                                    </a> : <img height="300" src={__item.preview} />
-                                                )
-                                            }
-                                        </div>
-                                    </li>
-                                )
-                            }
-                            </ul>
+                            <div class="mpp-main-menu-dropdown-wrap-lvl-2 container">
+                                <ul class="mpp-main-menu-list-lvl-2">
+                                    {
+                                        item.items.map( _item => 
+                                            <li class="mpp-main-menu-item-lvl-2">
+                                                <a href={_item.path}>{_item.title}</a>
+                                            </li>
+                                        )
+                                    }
+
+                                </ul>
+                                <div class="mpp-main-menu-dropdown-previews">
+                                    {
+                                        item.preview1 && 
+                                        <a href={item.link1}>
+                                            <figure class="mpp-main-menu-dropdown-preview">
+                                                <img loading="lazy" src={item.preview1} />
+                                                <figcaption
+                                                    class={`mpp-main-menu-dropdown-preview__title mpp-main-menu-dropdown-preview__title--${item.color}`}
+                                                >
+                                                    {item.description1}
+                                                </figcaption>
+                                            </figure>
+                                        </a>
+                                    }
+                                    {
+                                        item.preview2 && 
+                                        <a href={item.link1}>
+                                            <figure class="mpp-main-menu-dropdown-preview">
+                                                <img loading="lazy" src={item.preview2} />
+                                                <figcaption
+                                                    class={`mpp-main-menu-dropdown-preview__title mpp-main-menu-dropdown-preview__title--${item.color}`}
+                                                >
+                                                    {item.description2}
+                                                </figcaption>
+                                            </figure>
+                                        </a>
+                                        
+                                    }
+                                    {
+                                        item.preview && 
+                                            <img loading="lazy" class="mpp-main-menu-dropdown-preview" src={item.preview} />
+                                    }
+                                </div>
+                                                    
+                                                
+                            </div>
+                            
                         </div>
                     }
                     
@@ -57,7 +80,7 @@ const data = await response.json();
         position: relative;
         @media (max-width: 768px) {
             position: fixed;
-            top: 4em;
+            top: calc(4em + 7px);
             left: 0;
             right: 0;
         }
@@ -78,6 +101,9 @@ const data = await response.json();
             white-space: nowrap;
             font-size: .75em;
         }
+        &:last-child {
+            padding-right: 2em;
+        }
     }
     .mpp-main-menu-dropdown-lvl-2 {
         position: absolute;
@@ -94,27 +120,26 @@ const data = await response.json();
         display: flex;
         flex-direction: column;
     }
+    .mpp-main-menu-dropdown-wrap-lvl-2 {
+        display: flex;
+        justify-content: space-between;
+    }
     .mpp-main-menu-item-lvl-2 {
         & > a {
             padding: .5em .25em;
             margin: 0 -0.25em;
             display: inline-block;
+            width: 100%;
             &:hover {
                 background: #e5e5e5;
             }
         }
-        &:hover .mpp-main-menu-dropdown-previews {
-            display: flex;
-        }
     }
     .mpp-main-menu-dropdown-previews {
-        position: absolute;
-        z-index: 1;
-        right: 0;
-        top: 0;
-        width: min(calc(600px + 2em), 50%);
-        display: none;
+        display: flex;
+        justify-content: flex-end;
         gap: 1.5em;
+        flex: 1;
     }
     .mpp-main-menu-dropdown-preview {
         flex: 1;
@@ -147,18 +172,18 @@ const data = await response.json();
 </style>
 
 <script>
-    const itemsMainMenu = document.querySelectorAll(".mpp-main-menu-item-lvl-2");
+    // const itemsMainMenu = document.querySelectorAll(".mpp-main-menu-item-lvl-2");
     
-    const resizeDesktopDropdownMenu = () => {
-        itemsMainMenu.forEach(el => {
-            el.addEventListener("mouseover", () => {
-                let dropdownMenu = el.querySelector('.mpp-main-menu-dropdown-previews');
-                let dropdownMenuHeight = dropdownMenu.offsetHeight;
-                console.log(dropdownMenuHeight);
-                dropdownMenu.closest('.mpp-main-menu-dropdown-lvl-2').style.minHeight = `calc(${dropdownMenuHeight}px + 3em)`;
-            });
-        })
-    }
-    resizeDesktopDropdownMenu();
-    window.onresize = () => resizeDesktopDropdownMenu();
+    // const resizeDesktopDropdownMenu = () => {
+    //     itemsMainMenu.forEach(el => {
+    //         el.addEventListener("mouseover", () => {
+    //             let dropdownMenu = el.querySelector('.mpp-main-menu-dropdown-previews');
+    //             let dropdownMenuHeight = dropdownMenu.offsetHeight;
+    //             console.log(dropdownMenuHeight);
+    //             dropdownMenu.closest('.mpp-main-menu-dropdown-lvl-2').style.minHeight = `calc(${dropdownMenuHeight}px + 3em)`;
+    //         });
+    //     })
+    // }
+    // resizeDesktopDropdownMenu();
+    // window.onresize = () => resizeDesktopDropdownMenu();
 </script>

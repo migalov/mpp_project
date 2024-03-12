@@ -10,9 +10,9 @@ const data = await response.json();
                 <li class="mpp-main-mobile-menu-item-lvl-1">
                     <a href={item.path}>{item.title}</a>
                         {
-                            item.items && 
-                            <input id={`dropdown-list-${item.index}`} class="mpp-main-mobile-toggle" type="checkbox" value="" />
-                            <label for={`dropdown-list-${item.index}`}>
+                            item?.items?.length > 0 && 
+                            <input id={`dropdown-list-${item.id}`} class="mpp-main-mobile-toggle" type="checkbox" value="" />
+                            <label for={`dropdown-list-${item.id}`}>
                                 <Arrow />
                             </label>
                             <ul class="mpp-main-mobile-menu-list-lvl-2">
@@ -32,9 +32,6 @@ const data = await response.json();
 </nav>
 
 <style is:global lang="scss">
-.logo {
-    margin: 0 11vw 0 0;
-}
 
 .mpp-header-mobile {
     background: #FFFFFF;
@@ -45,6 +42,9 @@ const data = await response.json();
     z-index: 1;
     @media (min-width: 768px) {
         display: none;
+    }
+    & .logo {
+    margin: 0 11vw 0 0;
     }
 }
 
@@ -72,6 +72,10 @@ const data = await response.json();
 
 .mpp-main-menu {
     flex-basis: 100%;
+    @media (max-width:768px) {
+        border-top: 1px solid rgba(0,0,0,.25);
+        border-bottom: 1px solid rgba(0,0,0,.25);
+    }
 }
 
 .mpp-main-menu-wrapper {
@@ -124,13 +128,17 @@ const data = await response.json();
     max-height: 0;
 }
 
+.mpp-main-mobile-menu-item-lvl-2 > a {
+    font-weight: 500;
+}
+
 .mpp-main-mobile-toggle {
     display: none;
 }
 
 
 .mpp-main-mobile-toggle:checked ~ .mpp-main-mobile-menu-list-lvl-2 {
-    margin: 1em 0 0 3.5em;
+    margin: 1em 0 0 1.5em;
     max-height: 1000px;
 
 

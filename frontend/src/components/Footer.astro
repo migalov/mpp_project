@@ -1,0 +1,35 @@
+<footer class="mpp-footer">
+    <div class="mpp-footer-wrap container">
+        <div class="mpp-footer-logo">logo</div>
+        <div class="mpp-footer-rating">rating</div>
+        <div class="mpp-footer-abp">abp</div>
+        <div class="mpp-footer-social">social</div>
+        <div class="mpp-footer-menu">menu</div>
+        <div class="mpp-footer-doc">doc</div>
+    </div>
+</footer>
+
+<style is:global lang="scss">
+    .mpp-footer-wrap {
+        display: grid;
+        grid-template-areas: "logo rating" "abp abp" "social social" "menu menu" "doc doc";
+    }
+    .mpp-footer-logo {
+        grid-area: logo;
+    }
+    .mpp-footer-rating {
+        grid-area: rating;
+    }
+    .mpp-footer-abp {
+        grid-area: abp;
+    }
+    .mpp-footer-social {
+        grid-area: social;
+    }
+    .mpp-footer-menu {
+        grid-area: menu;
+    }
+    .mpp-footer-doc {
+        grid-area: doc;
+    }
+</style>

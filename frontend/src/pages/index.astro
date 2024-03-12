@@ -3,6 +3,7 @@ import MobileHeader from "../components/MobileHeader/MobileHeader.astro";
 import MainMenu from "../components/MainMenu.astro";
 import DesktopHeader from "../components/DesktopHeader/DesktopHeader.astro";
 import MobilePanel from "../components/MobilePanel.astro";
+import Footer from "../components/Footer.astro";
 
 
 const response = await fetch(`http://localhost:1337/api/navigation/render/mobile-menu?type=TREE`);
@@ -19,15 +20,13 @@ const data = await response.json();
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-		<!-- <link href="
-		https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
-		" rel="stylesheet"> -->
 	</head>
 	<body>
 		<DesktopHeader />
 		<MobileHeader />
 		<MainMenu />
 		<MobilePanel />
+		<Footer />
 	</body>
 </html>
 

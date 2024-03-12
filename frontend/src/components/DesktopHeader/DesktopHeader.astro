@@ -42,7 +42,7 @@ const data = await response.json();
                     <li class="mpp-main-desktop-menu-item-lvl-1">
                         <a href={item.path}>{item.title}</a>
                             {
-                                item.items && 
+                                item?.items?.length > 0 && 
                                     <Arrow />
                                     <ul class="mpp-main-desktop-menu-list-lvl-2">
                                     {
@@ -83,7 +83,7 @@ const data = await response.json();
         }
 
         & .logo {
-            margin: 0.4em 0 0.1em;
+            margin: .8rem 0 0;
         }
     }
 
@@ -91,6 +91,7 @@ const data = await response.json();
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas: "tl tr" "bl br";
+    grid-gap: .2rem 0;
 }
 
 .mpp-header-desktop-menu-top-left {
@@ -112,7 +113,7 @@ const data = await response.json();
     align-items: center;
     justify-content: space-between;
     position: relative;
-    top: -5px;
+    top: -10px;
 
 
 }
@@ -128,13 +129,13 @@ const data = await response.json();
 }
 
 .mpp-header-desktop-wrap li > a {
-    font-size: .625rem;
+    font-size: .725rem;
 }
 
 .mpp-main-desktop-menu-item-lvl-1 {
     position: relative;
     padding: 0 0 1em;
-    margin: 0 0 -0.8em;
+    margin: 0 0 -0.6em;
 
     & svg {
         margin: 0 0 0 .2em;
@@ -142,9 +143,15 @@ const data = await response.json();
     }
 
     &:hover {
+        & > a {
+        }
         & .mpp-main-desktop-menu-list-lvl-2 {
             display: flex;
         }
+    }
+
+    & > a:hover .mpp-main-desktop-menu-list-lvl-2 {
+        display: flex;
     }
 }
 
@@ -152,7 +159,8 @@ const data = await response.json();
 
 .mpp-main-desktop-menu-list-lvl-2 {
     position: absolute;
-    top: 2em;
+    top: 1.2em;
+    left: -0.2em;
     display: none;
     flex-direction: column;
     box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.25);
