@@ -1,0 +1,146 @@
+---
+import Arrow from '../icons/Arrow.astro';
+const response = await fetch(`http://localhost:1337/api/navigation/render/footer-menu?type=TREE`);
+const data = await response.json();
+---
+
+<nav class="mpp-footer-menu">
+    <ul class="mpp-footer-menu-list-lvl-1">
+        {
+            data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
+                (item.title !== "Социальные сети" && item.title !== "ABP") &&
+                <li class="mpp-footer-menu-item-lvl-1">
+                            {item?.items?.length > 0 && <input id={`dropdown-list-${item.id}`} hidden class="mpp-footer-menu-toggle" type="radio" name="footer-menu-toggle" value="" />}
+                            <a class="mpp-footer-menu-item-lvl-1-link" href={item.path}>{item.title}</a>
+                            {
+                                item?.items?.length > 0 && 
+                                <label class="mpp-footer-menu-toggle-label" for={`dropdown-list-${item.id}`}>
+                                    <Arrow />
+                                </label>
+                            }
+                            <ul class="mpp-footer-menu-list-lvl-2">
+                            {
+                                item.items.map( (_item: { path: string | URL; title: unknown; }) =>
+                                    <li class="mpp-footer-menu-list-item-lvl-2 ">
+                                        <a class="mpp-footer-menu-list-item-lvl-2-link" href={_item.path}>{ _item.title }</a>
+                                    </li>
+                                )
+                            }
+                        </ul>  
+                </li> 
+            )
+        }
+    </ul>  
+</nav>
+
+<style is:global lang="scss">
+    
+
+.mpp-footer-menu-list-lvl-1 {
+    @media (min-width: 768px) {
+        display: flex;
+        flex-direction: row;
+    }
+    @media (min-width: 992px) {
+        justify-content: flex-end;
+    }
+    
+}
+.mpp-footer-menu-item-lvl-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 1;
+    &:not(:last-child) {
+        @media (max-width: 768px) {
+            border-bottom: .25px solid rgba(0,0,0,.5); 
+        }
+       
+    }
+    @media (min-width: 768px) {
+        display: block;
+        flex: inherit;
+        &:nth-child(2) {
+            margin-left: clamp(32px, calc(2rem + ((1vw - 7.68px) * 14.2857)), 128px);
+        }
+        &:nth-child(3) {
+            margin-left: clamp(6px, calc(0.375rem + ((1vw - 7.68px) * 2.6786)), 24px);
+        }
+        &:nth-child(4), &:nth-child(5) {
+            margin-left: clamp(20px, calc(1.25rem + ((1vw - 7.68px) * 8.9286)), 80px);;
+        }
+    }
+}
+
+.mpp-footer-menu-item-lvl-1-link {
+    flex: 1;
+    display: inline-block;
+    padding: 1em 0;
+    font-weight: 600;
+    @media (min-width: 768px) {
+        padding: 0 0 1em;
+    }
+}
+.mpp-footer-menu-toggle-label {
+    flex: 1;
+    text-align: right;
+    padding: 1em 0;
+    cursor: pointer;
+    & svg {
+        width: 17px;
+        height: 9px;
+        & path {
+            stroke-width: 2px;
+        }
+    }
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+
+.mpp-footer-menu-list-lvl-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    flex-basis: 100%;
+    overflow: hidden;
+    @media (max-width: 768px) {
+        max-height: 0;
+    }
+    transition: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.mpp-footer-menu-item-lvl-1-link:hover, .mpp-footer-menu-list-item-lvl-2-link:hover {
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .mpp-footer-menu-toggle:checked ~ .mpp-footer-menu-list-lvl-2 {
+        max-height: 1000px;
+        margin: 0 0 1.1em;
+    }
+
+
+    .mpp-footer-menu-toggle {
+        &:checked {
+            & ~ .mpp-footer-menu-list-lvl-2 {
+                max-height: 1000px;
+            }
+            & ~ .mpp-footer-menu-toggle-label {
+                & svg {
+                    transform: rotate(180deg);
+                    & path {
+                        stroke: #F3704E;
+                    }
+                }
+            }
+            & ~ .mpp-footer-menu-item-lvl-1-link {
+                color: #F3704E;
+            }
+        }
+    }
+}
+
+
+</style>

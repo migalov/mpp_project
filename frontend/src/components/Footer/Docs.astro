@@ -1,0 +1,54 @@
+---
+const response = await fetch(`http://localhost:1337/api/navigation/render/footer-oficial-docs`);
+const data = await response.json();
+---
+
+
+<ul class="mpp-footer-doc">
+    {
+        data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
+            <li class="mpp-footer-menu-item-doc">
+                {
+                    item.path !== "#" ?
+                        <a href={item.path}>{item.title}</a> :
+                        item.title
+                }
+                
+            </li> 
+        )
+    }
+</ul>
+
+<style is:global lang="scss">
+    .mpp-footer-doc {
+        @media (min-width: 768px) {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        @media (min-width: 768px) and (max-width: 992px) {
+            flex-wrap: wrap;
+            gap: .5em 0;
+        }
+        @media (min-width: 992px) {
+            margin-top: 1.2em;
+        }
+    }
+
+    .mpp-footer-menu-item-doc {
+        &:nth-child(2n+3) {
+            @media (max-width: 768px) {
+                margin: 1em 0 0;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 992px) {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-basis: 50%;
+        }
+        & a:hover {
+            text-decoration: none;
+        }
+    }
+</style>

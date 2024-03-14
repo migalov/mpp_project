@@ -1,0 +1,63 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global lang="scss">
+    *, *::after, *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html {
+        overflow-x: hidden;
+    }
+    body {
+        margin: 0;
+        color: #000;
+        font-family: "Montserrat", sans-serif;
+        background-color: antiquewhite;
+        min-height: 200vh;
+    }
+    header {
+        z-index: auto;
+    }
+    ol, ul, dl {
+        margin: 0;
+    }
+    li {
+        list-style-type: none;
+    }
+    a {
+        color: #000;
+        text-decoration: none;
+        font-family: "Montserrat", sans-serif;
+        transition: color ease .5s;
+    }
+    a:hover {
+        color: #F3704E;
+    }
+    img {
+        max-width: 100%;
+    }
+    .container {
+        margin: 0 auto;
+        
+        padding: 0 2rem;
+           max-width: 1440px;
+    }
+    .alert.alert-danger {
+        display: none;
+    }
+</style>

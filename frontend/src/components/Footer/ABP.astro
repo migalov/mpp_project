@@ -1,0 +1,30 @@
+---
+const response = await fetch(`http://localhost:1337/api/navigation/render/footer-menu?path=/abp`);
+const data = await response.json();
+---
+
+<nav class="mpp-footer-abp">
+   <ul>
+        {
+            data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
+                (item.title !== "ABP") &&
+                <li>
+                    <a href={item.path}>{item.title}</a>
+                </li> 
+            )
+        }
+    </ul> 
+</nav>
+
+<style is:global lang="scss">
+    .mpp-footer-abp {
+        & a {
+            font-weight: 600;
+        }
+        & ul {
+            display: flex;
+            flex-direction: column;
+            gap: .2em;
+        }
+    }
+</style>

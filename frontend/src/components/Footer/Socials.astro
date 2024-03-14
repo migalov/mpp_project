@@ -1,0 +1,43 @@
+---
+const response = await fetch(`http://localhost:1337/api/navigation/render/footer-menu?path=/socials`);
+const data = await response.json();
+---
+
+<ul class="mpp-footer-menu-list-socials">
+    {
+        data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
+            (item.title !== "Социальные сети") &&
+            <li class="mpp-footer-menu-list-socials-item">
+                <a href={item.externalPath} set:html={item.preview} />
+            </li> 
+        )
+    }
+</ul>
+
+<style is:global lang="scss">
+    .mpp-footer-menu-list-socials {
+        display: flex;
+        gap: 11px;
+    }
+    .mpp-footer-menu-list-socials-item {
+        & circle, & path {
+            transition: ease .5s;
+        }
+    }
+    .mpp-footer-menu-list-socials-item {
+        &:not(:last-child):hover {
+            & svg {
+                & circle {
+                    fill: #F3704E;
+                }
+            }
+        }
+        &:last-child:hover {
+            & svg {
+                & path {
+                    fill: #F3704E;
+                }
+            }
+        }
+    }
+</style>

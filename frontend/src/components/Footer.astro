@@ -1,30 +1,86 @@
-<footer class="mpp-footer">
+---
+import Logo from '../components/icons/Logo.astro';
+import Rating from '../components/Footer/Rating.astro';
+import VK from '../components/icons/footer/VK.astro';
+import Dzen from '../components/icons/footer/Dzen.astro';
+import Telegram from '../components/icons/footer/Telegram.astro';
+import FooterMenu from '../components/Footer/Menu.astro';
+import Socials from '../components/Footer/Socials.astro';
+import ABP from '../components/Footer/ABP.astro';
+import Docs from '../components/Footer/Docs.astro';
+---
+
+<footer class="mpp-footer full-width">
     <div class="mpp-footer-wrap container">
-        <div class="mpp-footer-logo">logo</div>
-        <div class="mpp-footer-rating">rating</div>
-        <div class="mpp-footer-abp">abp</div>
-        <div class="mpp-footer-social">social</div>
-        <div class="mpp-footer-menu">menu</div>
-        <div class="mpp-footer-doc">doc</div>
+        <div class="mpp-footer-logo"><Logo /></div>
+        <div class="mpp-footer-rating"><Rating /></div>
+        <div class="mpp-footer-abp"><ABP /></div>
+        <Socials />
+        <FooterMenu />
+        <Docs />
     </div>
 </footer>
 
 <style is:global lang="scss">
+    .mpp-footer {
+        padding: 1.5em 0;
+        background-color: #F0F0F0;
+        @media (min-width: 768px) {
+            padding: 2.5em 0;
+        }
+        @media (min-width: 992px) {
+            padding: 3.5em 0;
+        }
+    }
     .mpp-footer-wrap {
         display: grid;
-        grid-template-areas: "logo rating" "abp abp" "social social" "menu menu" "doc doc";
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+            "logo rating"
+            "abp abp"
+            "social social"
+            "menu menu"
+            "doc doc";
+        @media (min-width: 768px) {
+            grid-template-areas:
+                "logo abp rating"
+                "menu menu menu"
+                "social doc doc";
+            grid-gap: 0 1em;
+        }
+        @media (min-width: 992px) {
+            grid-template-areas:
+                "logo menu menu"
+                "abp menu menu"
+                "rating social social"
+                "doc doc doc";
+        }
+        grid-gap: 1em 0;
+        @media (min-width: 768px) and (max-width: 992px) {
+            grid-gap: 1em 2em;
+        }
+        & li, & li > a {
+            font-size: .75rem;
+        }
     }
     .mpp-footer-logo {
         grid-area: logo;
     }
     .mpp-footer-rating {
         grid-area: rating;
+        @media (max-width: 768px) {
+            text-align: right;
+        }
     }
     .mpp-footer-abp {
         grid-area: abp;
     }
-    .mpp-footer-social {
+    .mpp-footer-menu-list-socials {
         grid-area: social;
+        height: 26px;
+        @media (min-width: 992px) {
+            justify-content: flex-end;
+        }
     }
     .mpp-footer-menu {
         grid-area: menu;
