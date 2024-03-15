@@ -1,7 +1,9 @@
 ---
-import Logo from '../icons/Logo.astro'
-import CartButton from '../icons/CartButton.astro'
+import Logo from '../icons/Logo.astro';
+import CartButton from '../icons/CartButton.astro';
+import LoginButton from '../icons/LoginButton.astro';
 import Arrow from '../icons/Arrow.astro';
+import Clock from '../icons/nav-desktop/Clock.astro';
 import Phone from '../icons/nav-desktop/Phone.astro';
 import Mail from '../icons/nav-desktop/Mail.astro';
 
@@ -22,14 +24,14 @@ const data = await response.json();
                                 item.items && 
                                     <Arrow />
                                     <ul class="mpp-main-desktop-menu-list-lvl-2">
-                                    {
-                                        item.items.map( (_item: { path: string | URL; title: unknown; }) =>
-                                            <li>
-                                                <a href={_item.path}>{ _item.title }</a>
-                                            </li>
-                                        )
-                                    }
-                                </ul>  
+                                        {
+                                            item.items.map( (_item: { path: string | URL; title: unknown; }) =>
+                                                <li>
+                                                    <a href={_item.path}>{ _item.title }</a>
+                                                </li>
+                                            )
+                                        }
+                                    </ul>  
                             }
                     </li> 
                 )
@@ -61,11 +63,14 @@ const data = await response.json();
         <Logo class:list={['mpp-header-desktop-menu-bottom-left', 'logo']} />
         <div class="mpp-header-desktop-menu-bottom-right">
             <ul class="mpp-header-desktop-contacts">
-                <li><a href="tel:88007750861"><Phone /> 8 (800) 775 08 61</a></li>
-                <li><a href="support@myphotopages.ru"><Mail /> support@myphotopages.ru</a></li>
+                <li class="mpp-header-desktop-contacts__phone"><a href="tel:88007750861"><Phone /> 8 (800) 775 08 61</a></li>
+                <li class="mpp-header-desktop-contacts__time"><Clock /> ежедневно 10:00-20:00</li>
+                <li class="mpp-header-desktop-contacts__mail"><a href="support@myphotopages.ru"><Mail /> support@myphotopages.ru</a></li>
             </ul>
             <div class="mpp-header-desktop-user-actions">
-                <a class="mpp-header-desktop-btn-login" href="/">Войти</a>
+                <a class="mpp-header-desktop-btn-login" href="/">
+                    <LoginButton />
+                </a>
                 <a class="mpp-header-desktop-btn-cart" href="/cart">
                     <CartButton />
                 </a>
@@ -89,9 +94,9 @@ const data = await response.json();
 
 .mpp-header-desktop-wrap {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 2fr;
     grid-template-areas: "tl tr" "bl br";
-    grid-gap: .2rem 0;
+    grid-gap: .2rem 1.625rem;
 }
 
 .mpp-header-desktop-menu-top-left {
@@ -112,8 +117,6 @@ const data = await response.json();
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
-    top: -10px;
 
 
 }
@@ -128,8 +131,9 @@ const data = await response.json();
     grid-area: bl;
 }
 
-.mpp-header-desktop-wrap li > a {
-    font-size: .725rem;
+.mpp-header-desktop-wrap li, .mpp-header-desktop-wrap a {
+    font-size: .625rem;
+    font-weight: 500;
 }
 
 .mpp-main-desktop-menu-item-lvl-1 {
@@ -191,42 +195,57 @@ const data = await response.json();
 
 .mpp-header-desktop-contacts {
     display: flex;
-    flex-direction: column;
     align-items: start;
-    gap: .7em;
+    gap: 1.5em;
 
     & a {
         display: flex;
         align-items: center;
         gap: .5em;
     }
+
+    & > li {
+        font-size: .625rem;
+    }
+    @media (min-width: 768px) and (max-width: 992px) {
+        flex-direction: column;
+        gap: 0.2em;
+        position: relative;
+        top: 4px;
+    }
 }
 
-.mpp-header-desktop-btn-login {
+.mpp-header-desktop-btn-login, .mpp-header-desktop-btn-cart {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-weight: 700;
-    min-width: 90px;
-    height: 23px;
-    border: 1px solid #000;
-    border-radius: 1em;
-    font-size: .625rem;
-}
-
-.mpp-header-desktop-btn-cart {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
     width: 26px;
     height: 26px;
     border-radius: 50%;
+    box-shadow: 1px 1px 7px 0 rgba(0, 0, 0, 0.15);
+}
+
+.mpp-header-desktop-btn-login svg:hover {
+    & circle {
+        fill: #000000;
+    }
+    & path {
+        stroke: #FFFFFF;
+    }
+}
+
+.mpp-header-desktop-btn-cart svg:hover {
+    & circle {
+        fill: #FFFFFF;
+    }
+    & path {
+        stroke: #000000;
+    }
 }
 
 .mpp-header-desktop-user-actions {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 1rem;
 }
 </style>

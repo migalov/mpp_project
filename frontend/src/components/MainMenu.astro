@@ -1,4 +1,6 @@
 ---
+import Arrow from "./icons/Arrow.astro";
+
 const response = await fetch(`http://localhost:1337/api/navigation/render/main-menu?type=TREE`);
 const data = await response.json();
 
@@ -9,11 +11,11 @@ const data = await response.json();
         <ul class="mpp-main-menu-list-lvl-1">
             {
                 data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
-                <li class="mpp-main-menu-item-lvl-1">
-                    <a href={item.path}>{item.title}</a>
-                    {
 
-                        item.items &&
+                <li class="mpp-main-menu-item-lvl-1">
+                    <a href={item.path}>{item.title} {item.title === "Еще" && <Arrow />}</a>
+                    {
+                        (item.items && item.title !== "Еще") &&
                         <div class="mpp-main-menu-dropdown-lvl-2">
                             <div class="mpp-main-menu-dropdown-wrap-lvl-2 container">
                                 <ul class="mpp-main-menu-list-lvl-2">
@@ -33,7 +35,7 @@ const data = await response.json();
                                             <figure class="mpp-main-menu-dropdown-preview">
                                                 <img loading="lazy" src={item.preview1} />
                                                 <figcaption
-                                                    class={`mpp-main-menu-dropdown-preview__title mpp-main-menu-dropdown-preview__title--${item.color}`}
+                                                    class={`mpp-main-menu-dropdown-preview__title mpp-main-menu-dropdown-preview__title--${item.color1}`}
                                                 >
                                                     {item.description1}
                                                 </figcaption>
@@ -46,7 +48,7 @@ const data = await response.json();
                                             <figure class="mpp-main-menu-dropdown-preview">
                                                 <img loading="lazy" src={item.preview2} />
                                                 <figcaption
-                                                    class={`mpp-main-menu-dropdown-preview__title mpp-main-menu-dropdown-preview__title--${item.color}`}
+                                                    class={`mpp-main-menu-dropdown-preview__title mpp-main-menu-dropdown-preview__title--${item.color2}`}
                                                 >
                                                     {item.description2}
                                                 </figcaption>
@@ -55,7 +57,7 @@ const data = await response.json();
                                         
                                     }
                                     {
-                                        item.preview && 
+                                        (item.link1 === "#") &&
                                             <img loading="lazy" class="mpp-main-menu-dropdown-preview" src={item.preview} />
                                     }
                                 </div>
@@ -64,6 +66,18 @@ const data = await response.json();
                             </div>
                             
                         </div>
+                    }
+                    {
+                        (item.items && item.title === "Еще") && 
+                        <ul class="mpp-main-desktop-menu-list-lvl-2">
+                            {
+                                item.items.map( (_item) =>
+                                    <li>
+                                        <a href={_item.path}>{ _item.title }</a>
+                                    </li>
+                                )
+                            }
+                        </ul>
                     }
                     
                 </li>
@@ -95,13 +109,22 @@ const data = await response.json();
         @media (min-width: 768px) {
             &:hover .mpp-main-menu-dropdown-lvl-2 {
                 display: block;
+                opacity: 1;
+                transform: translateY(0);
+                z-index: 10;
             } 
+            &:hover .mpp-main-desktop-menu-list-lvl-2 {
+                display: block;
+                left: -1.2em;
+                top: 2.4em;
+            }
         }
         & > a {
             white-space: nowrap;
             font-size: .75em;
         }
         &:last-child {
+            position: relative;
             padding-right: 2em;
         }
     }
@@ -110,10 +133,13 @@ const data = await response.json();
         top: 100%;
         left: 0;
         right: 0;
-        box-shadow: 0 11px 13px 0 rgba(0, 0, 0, 0.15);
-        padding: 1em 0;
-        display: none;
+        box-shadow: 0 11px 20px 0 rgba(0, 0, 0, 0.2);
+        padding: 1.5rem 0 2.5rem;
+        z-index: -1;
         background: #FFFFFF;
+        opacity: 0;
+        transform: translateY(-1rem);
+        transition: ease .5s;
     }
     .mpp-main-menu-dropdown-lvl-2 ul {
         position: relative;
@@ -121,15 +147,19 @@ const data = await response.json();
         flex-direction: column;
     }
     .mpp-main-menu-dropdown-wrap-lvl-2 {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: 1.5rem;
         justify-content: space-between;
     }
     .mpp-main-menu-item-lvl-2 {
         & > a {
-            padding: .5em .25em;
+            padding: 0.88em 1.8em 0.88em .33em;
             margin: 0 -0.25em;
             display: inline-block;
-            width: 100%;
+            font-size: .75rem;
+            font-weight: 500;
+            transition: ease .5s;
             &:hover {
                 background: #e5e5e5;
             }
@@ -140,6 +170,9 @@ const data = await response.json();
         justify-content: flex-end;
         gap: 1.5em;
         flex: 1;
+        & > a {
+            width: 100%;
+        }
     }
     .mpp-main-menu-dropdown-preview {
         flex: 1;
@@ -154,20 +187,30 @@ const data = await response.json();
         }
         & figcaption {
             position: absolute;
-            top: 1em;
-            left: 1em;
-            right: 1em;
+            top: 2.14em;
+            left: 2.14em;
+            right: 2.14em;
             font-size: .75rem;
             font-weight: 500;
             width: min(300px, 80%);
         }
     }
 
+    mpp-main-menu-dropdown-preview__title {
+        font-size: 1.875rem;
+    }
+
     .mpp-main-menu-dropdown-preview__title--white {
         color: #FFFFFF;
+        &:hover {
+            color: #FFFFFF;
+        }
     }
     .mpp-main-menu-dropdown-preview__title--black {
         color: #000000;
+        &:hover {
+            color: #000000;
+        }
     }
 </style>
 
