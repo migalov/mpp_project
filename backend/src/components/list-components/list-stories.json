@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_list_components_list_stories",
+  "info": {
+    "displayName": "ListStories",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "Stories": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ui-blocks.story"
+    }
+  }
+}

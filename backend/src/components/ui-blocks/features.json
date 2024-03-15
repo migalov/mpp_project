@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_ui_blocks_features",
+  "info": {
+    "displayName": "Feature",
+    "icon": "check",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "src": {
+      "type": "string"
+    }
+  }
+}

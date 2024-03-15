@@ -1,0 +1,111 @@
+---
+const response1 = await fetch(`http://localhost:1337/api/grid-banner?populate[Main][populate]=*`);
+const response2 = await fetch(`http://localhost:1337/api/grid-banner?populate[Side][populate]=*`);
+const dataMain = await response1.json();
+const dataSide = await response2.json();
+---
+
+<div class="mpp-banners container">
+    <div class="mpp-banner-main">
+        <section class="splide" aria-label="Basic Structure Example">
+            <div class="splide__track">
+              <ul class="splide__list">
+                <!-- {
+                    dataMain.data.attributes.Main.map(item =>
+                        <li class="splide__slide mpp-main-slide-item">
+                            <picture>
+                                <source srcset={item.srcMobile} media="(max-width: 768px)" />
+                                <source srcset={item.srcDesktop} media="(min-width: 768px)" />
+                                <img src={item.srcDesktop} />
+                            </picture>
+                            <img src={item.src} alt="" />
+                            <div class="mpp-main-slide-item__body" set:html={item.body} />
+                            <a class="mpp-main-slide-item__button" href={item.Button.link}>{item.Button.label}</a>
+                        </li>
+                    )
+                } -->
+                {
+                    dataMain.data.attributes.Main.map(item =>
+                        <li class="splide__slide mpp-main-slide-item">
+                            <img srcset={`${item.srcMobile} 768w, ${item.srcDesktop}`} alt="" />
+                            <div class="mpp-main-slide-item__body" set:html={item.body} />
+                            <a class="mpp-main-slide-item__button" href={item.Button.link}>{item.Button.label}</a>
+                        </li>
+                    )
+                }
+              </ul>
+            </div>
+          </section>
+    </div>
+    {dataSide.data.attributes.Side.map(item =>
+        <figure class="mpp-banner-side">
+            <img src={item.src} alt="" />
+            <figcaption set:html={item.body} />
+        </figure>
+    )}
+</div>
+
+<style lang="scss" scoped>
+    .container {
+        max-width: 900px;
+    }
+    .mpp-banners {
+        @media (min-width: 768px) {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            grid-template-areas: "m s1" "m s2";
+            grid-gap: 1.25rem 1.625rem;
+        }
+        
+    }
+    .mpp-banner-side:nth-child(1) {
+        grid-area: s1;
+    }
+    .mpp-banner-side:nth-child(2) {
+        grid-area: s2;
+    }
+    .mpp-main-slide-item {
+        position: relative;
+
+        
+        & img {
+            overflow: hidden;
+            border-radius: 15px;
+            background: linear-gradient(360deg, #d9d9d9 0%, #737373 100%);
+            object-fit: cover;
+            min-height: 350px;
+        }
+    }
+    .mpp-main-slide-item__body {
+        position: absolute;
+        left: 1rem;
+        right: 1rem;
+        top: 1.5rem;
+        
+        & > p {
+            font-size: .875em;
+            line-height: 160%;
+        }
+    }
+    .mpp-banner-side {
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+    .mpp-main-slide-item__button {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        background-color: #F3704E;
+        color: #f1f3f8;
+        font-size: .88rem;
+        min-width: 252px;
+        text-align: center;
+        min-height: 3rem;
+        border-radius: 99px;
+        font-weight: 700;
+        padding: 1.1em 0;
+        bottom: 4em;
+    }
+</style>

@@ -1126,6 +1126,36 @@ export interface ApiBannerMenuBannerMenu extends Schema.CollectionType {
   };
 }
 
+export interface ApiFeatureFeature extends Schema.CollectionType {
+  collectionName: 'features';
+  info: {
+    singularName: 'feature';
+    pluralName: 'features';
+    displayName: 'Feature';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Content: Attribute.DynamicZone<['ui-blocks.features']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::feature.feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::feature.feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiGlobalNavigationGlobalNavigation extends Schema.SingleType {
   collectionName: 'global_navigations';
   info: {
@@ -1162,20 +1192,20 @@ export interface ApiMainPageMainPage extends Schema.SingleType {
     singularName: 'main-page';
     pluralName: 'main-pages';
     displayName: 'Main Page';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
-    body: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'rich';
-        }
-      >;
+    Content: Attribute.DynamicZone<
+      [
+        'list-components.list-features',
+        'list-components.list-stories',
+        'ui-blocks.seo-block-model-1',
+        'list-components.grid-banners'
+      ]
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1187,6 +1217,37 @@ export interface ApiMainPageMainPage extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::main-page.main-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiStoryStory extends Schema.CollectionType {
+  collectionName: 'stories';
+  info: {
+    singularName: 'story';
+    pluralName: 'stories';
+    displayName: 'Story';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Content: Attribute.DynamicZone<['ui-blocks.story']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::story.story',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::story.story',
       'oneToOne',
       'admin::user'
     > &
@@ -1219,8 +1280,10 @@ declare module '@strapi/types' {
       'plugin::navigation.navigations-items-related': PluginNavigationNavigationsItemsRelated;
       'api::advertising-banner.advertising-banner': ApiAdvertisingBannerAdvertisingBanner;
       'api::banner-menu.banner-menu': ApiBannerMenuBannerMenu;
+      'api::feature.feature': ApiFeatureFeature;
       'api::global-navigation.global-navigation': ApiGlobalNavigationGlobalNavigation;
       'api::main-page.main-page': ApiMainPageMainPage;
+      'api::story.story': ApiStoryStory;
     }
   }
 }

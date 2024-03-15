@@ -50,5 +50,10 @@ const data = await response.json();
         & a:hover {
             text-decoration: none;
         }
+        @media (min-width: 768px) {
+            &:nth-child(3) {
+                order: -2;
+            }
+        }
     }
 </style>

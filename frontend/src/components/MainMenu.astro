@@ -101,27 +101,52 @@ const data = await response.json();
 
     }
     .mpp-main-menu-list-lvl-1 {
-
+        & .mpp-main-desktop-menu-list-lvl-2 {
+            & a {
+                font-size: .75rem;
+                font-weight: 500;
+            }
+        }
     }
     .mpp-main-menu-item-lvl-1 {
         font-weight: 600;
         padding: 1em 0;
         @media (min-width: 768px) {
-            &:hover .mpp-main-menu-dropdown-lvl-2 {
+            .mpp-main-desktop-menu-list-lvl-2 {
                 display: block;
+                z-index: -1;
+                transform: translateY(-2em);
+                opacity: 0;
+                transition: ease .5s;
+                left: -1.2em;
+                top: 2.4em;
+            }
+            &:hover .mpp-main-menu-dropdown-lvl-2 {
                 opacity: 1;
                 transform: translateY(0);
                 z-index: 10;
-            } 
+                
+            }
             &:hover .mpp-main-desktop-menu-list-lvl-2 {
-                display: block;
+                z-index: 10;
+                transform: translateY(0);
                 left: -1.2em;
                 top: 2.4em;
+                opacity: 1;
+            }
+            &:hover svg path{
+                stroke: #F3704E;
+                stroke-width: 2px;
             }
         }
         & > a {
             white-space: nowrap;
             font-size: .75em;
+            font-weight: 600;
+            & > svg {
+                width: 6px;
+                margin-left: 2px;
+            }
         }
         &:last-child {
             position: relative;
@@ -135,7 +160,7 @@ const data = await response.json();
         right: 0;
         box-shadow: 0 11px 20px 0 rgba(0, 0, 0, 0.2);
         padding: 1.5rem 0 2.5rem;
-        z-index: -1;
+        z-index: -3;
         background: #FFFFFF;
         opacity: 0;
         transform: translateY(-1rem);

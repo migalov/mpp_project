@@ -4,23 +4,22 @@
   "info": {
     "singularName": "main-page",
     "pluralName": "main-pages",
-    "displayName": "Main Page"
+    "displayName": "Main Page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "body": {
-      "type": "customField",
-      "options": {
-        "output": "HTML",
-        "preset": "rich"
-      },
-      "customField": "plugin::ckeditor.CKEditor"
+    "Content": {
+      "type": "dynamiczone",
+      "components": [
+        "list-components.list-features",
+        "list-components.list-stories",
+        "ui-blocks.seo-block-model-1",
+        "list-components.grid-banners"
+      ]
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_list_components_grid_banners",
+  "info": {
+    "displayName": "Grid Banners",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Banner": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ui-blocks.banner"
+    }
+  }
+}
