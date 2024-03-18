@@ -110,6 +110,35 @@ export interface UiBlocksSeoBlockModel1 extends Schema.Component {
           preset: 'rich';
         }
       >;
+    button: Attribute.Component<'ui-components.button'>;
+  };
+}
+
+export interface UiBlocksSeoBlockModel2 extends Schema.Component {
+  collectionName: 'components_ui_blocks_seo_block_model_2_s';
+  info: {
+    displayName: 'SEO Block (Model 2)';
+    icon: 'dashboard';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    firstColumn: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    secondColumn: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
   };
 }
 
@@ -149,6 +178,7 @@ declare module '@strapi/types' {
       'ui-blocks.banner': UiBlocksBanner;
       'ui-blocks.features': UiBlocksFeatures;
       'ui-blocks.seo-block-model-1': UiBlocksSeoBlockModel1;
+      'ui-blocks.seo-block-model-2': UiBlocksSeoBlockModel2;
       'ui-blocks.story': UiBlocksStory;
       'ui-components.button': UiComponentsButton;
     }

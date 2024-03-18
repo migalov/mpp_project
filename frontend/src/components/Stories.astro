@@ -1,0 +1,138 @@
+<section class="mpp-stories">
+    <div class="container">
+        <h2>Сохраняем ваши истории</h2>
+    </div>
+    <div class="mpp-stories-wrap container">
+        <ul class="mpp-stories-grid">
+            <li>
+                <a href="#">
+                    <figure>
+                        <div class="mpp-stori-shadow-background"></div>
+                        <img src="https://static.wow2print.com/storage/445/content/image/23425277865f81a1fa14346.78476882.webp" alt="">
+                        <figcaption>Фотокниги<br>от 990 ₽</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <figure>
+                        <div class="mpp-stori-shadow-background"></div>
+                        <img src="https://static.wow2print.com/storage/445/content/image/23425277865f81a1fa14346.78476882.webp" alt="">
+                        <figcaption>Фотокниги<br>от 990 ₽</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <figure>
+                        <div class="mpp-stori-shadow-background"></div>
+                        <img src="https://static.wow2print.com/storage/445/content/image/23425277865f81a1fa14346.78476882.webp" alt="">
+                        <figcaption>Фотокниги<br>от 990 ₽</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <figure>
+                        <div class="mpp-stori-shadow-background"></div>
+                        <img src="https://static.wow2print.com/storage/445/content/image/23425277865f81a1fa14346.78476882.webp" alt="">
+                        <figcaption>Фотокниги<br>от 990 ₽</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <figure>
+                        <div class="mpp-stori-shadow-background"></div>
+                        <img src="https://static.wow2print.com/storage/445/content/image/23425277865f81a1fa14346.78476882.webp" alt="">
+                        <figcaption>Фотокниги<br>от 990 ₽</figcaption>
+                    </figure>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <figure>
+                        <div class="mpp-stori-shadow-background"></div>
+                        <img src="https://static.wow2print.com/storage/445/content/image/23425277865f81a1fa14346.78476882.webp" alt="">
+                        <figcaption>Фотокниги<br>от 990 ₽</figcaption>
+                    </figure>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<style scoped lang="scss">
+    .mpp-stories {
+    padding: 2em 0;
+    h2 {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin: 0 0 .5em;
+        letter-spacing: 0.07em;
+    }
+
+}
+
+.mpp-stories-wrap {
+    overflow-x: auto;
+}
+
+.mpp-stories-grid {
+    gap: 2em;
+    display: flex;
+    flex-flow: row;
+    min-width: 100%;
+    padding: 0.7em 0 0;
+
+    @media (min-width: 992px) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 1200px) {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    & li {
+        // overflow: hidden;
+        // box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+        transition: ease .5s;
+        min-width: 265px;
+    }
+
+    & img {
+        border-radius: 15px;
+        object-fit: cover;
+    }
+    & figure {
+        position: relative;
+    }
+
+    & figcaption {
+        font-size: .8125rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        position: absolute;
+        left: 1.2em;
+        right: 1.2em;
+        bottom: 1.1em;
+        line-height: 1.7;
+        letter-spacing: 0.07em;
+        color: #FFFFFF;
+    }
+}
+
+.mpp-stori-shadow-background {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 5px);
+    border-radius: 15px;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 75%, rgba(0,0,0,0.5) 100%);
+}
+
+    .mpp-feature-body {
+        padding: 0.75em 1em 1em;
+    }
+</style>

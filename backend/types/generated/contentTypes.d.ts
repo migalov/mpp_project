@@ -1203,7 +1203,8 @@ export interface ApiMainPageMainPage extends Schema.SingleType {
         'list-components.list-features',
         'list-components.list-stories',
         'ui-blocks.seo-block-model-1',
-        'list-components.grid-banners'
+        'list-components.grid-banners',
+        'ui-blocks.seo-block-model-2'
       ]
     >;
     createdAt: Attribute.DateTime;

@@ -1,8 +1,19 @@
 ---
 import BaseLayout from "../BaseLayout.astro";
 import GridBanners from "../components/GridBanners.astro";
+import Features from "../components/Features.astro";
+import SEOBlockModelOne from "../components/SEOBlockModelOne.astro";
+import Stories from "../components/Stories.astro";
+import TwoColumnsSEOText from "../components/TwoColumnsSEOText.astro";
+
+const response = await fetch(`http://localhost:1337/api/navigation/render/main-menu?type=TREE`);
+const data = await response.json();
 ---
 
 <BaseLayout>
     <GridBanners />
+    <!-- <Stories />
+    <Features />
+    <SEOBlockModelOne /> -->
+    <TwoColumnsSEOText />
 </BaseLayout>

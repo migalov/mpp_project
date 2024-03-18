@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_ui_blocks_seo_block_model_1_s",
+  "collectionName": "components_ui_blocks_seo_block_model_2_s",
   "info": {
-    "displayName": "SEO Block (Model 1)",
+    "displayName": "SEO Block (Model 2)",
     "icon": "dashboard",
     "description": ""
   },
@@ -10,10 +10,7 @@
     "title": {
       "type": "string"
     },
-    "src": {
-      "type": "string"
-    },
-    "body": {
+    "firstColumn": {
       "type": "customField",
       "options": {
         "output": "HTML",
@@ -21,10 +18,13 @@
       },
       "customField": "plugin::ckeditor.CKEditor"
     },
-    "button": {
-      "type": "component",
-      "repeatable": false,
-      "component": "ui-components.button"
+    "secondColumn": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
