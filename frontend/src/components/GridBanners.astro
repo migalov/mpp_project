@@ -1,107 +1,218 @@
 ---
-// const response1 = await fetch(`http://localhost:1337/api/grid-banner?populate[Main][populate]=*`);
-// const response2 = await fetch(`http://localhost:1337/api/grid-banner?populate[Side][populate]=*`);
-// const dataMain = await response1.json();
-// const dataSide = await response2.json();
+const { mainSliderData, sideBannersData  } = Astro.props;
+
+import Arrow from '../components/icons/slider/Arrow.astro'
 ---
 
-<div class="mpp-banners container">
-    <div class="mpp-banner-main">
-        <section class="splide" aria-label="Basic Structure Example">
+<div class="mpp-banners">
+    <div class="mpp-banners-wrap container">
+        <section class="mpp-main-slider splide" aria-label="Splide Basic HTML Example">
             <div class="splide__track">
-              <ul class="splide__list">
-                
-                <!-- {
-                    dataMain.data.attributes.Main.map(item =>
-                        <li class="splide__slide mpp-main-slide-item">
-                            <picture>
-                                <source srcset={item.srcMobile} media="(max-width: 768px)" />
-                                <source srcset={item.srcDesktop} media="(min-width: 768px)" />
-                                <img src={item.srcDesktop} />
-                            </picture>
-                            <img src={item.src} alt="" />
-                            <div class="mpp-main-slide-item__body" set:html={item.body} />
-                            <a class="mpp-main-slide-item__button" href={item.Button.link}>{item.Button.label}</a>
-                        </li>
-                    )
-                } -->
-                <!-- {
-                    dataMain.data.attributes.Main.map(item =>
-                        <li class="splide__slide mpp-main-slide-item">
-                            <img srcset={`${item.srcMobile} 768w, ${item.srcDesktop}`} alt="" />
-                            <div class="mpp-main-slide-item__body" set:html={item.body} />
-                            <a class="mpp-main-slide-item__button" href={item.Button.link}>{item.Button.label}</a>
-                        </li>
-                    )
-                } -->
-
+                <ul class="splide__list">
+                    {
+                        mainSliderData?.map( (item, index) =>
+                            <li class="mpp-main-slide-item splide__slide" data-number={index}>
+                                <a class="mpp-main-slide-item-link-block" href={item.linkButton}>
+                                    <img src={item.srcDesktop} alt="" />
+                                    <div class="mpp-main-slide-item__body" set:html={item.body}>
+                                        <span class="btn btn-mobile">{item.labelButton}</span>
+                                    </div>
+                                    
+                                </a>
+                            </li>
+                        )
+                    }
               </ul>
             </div>
-          </section>
+            <div class="splide__arrows mpp-navigation-arrows">
+                <button class="splide__arrow splide__arrow--prev mpp-navigation-arrow mpp-navigation-arrow-left mpp-navigation-arrow-left--blocked">
+                    <Arrow />
+                </button>
+                <div class="mpp-navigation-count">
+                    <span class="mpp-navigation-count__current">1</span> / {mainSliderData.length}
+                </div>
+                <button class="splide__arrow splide__arrow--next mpp-navigation-arrow mpp-navigation-arrow-right">
+                    <Arrow />
+                </button>
+            </div>
+        </section>
+        {
+            sideBannersData?.map( (item, index) =>
+                <div class="mpp-side-banner" data-index={index+1}>
+                    <img src={item.srcDesktop} alt="" />
+                    <div class="mpp-side-banner__body" set:html={item.body} />
+                </div>
+            )
+        }        
     </div>
+
 </div>
 
-<style lang="scss" scoped>
-    .container {
-        max-width: 900px;
+<script>
+
+    const counter = document.querySelector('.mpp-navigation-count__current');
+    window.onload = () => {
+      const mainSlider = new Splide('.splide', {
+        type: 'fade',
+        rewind: true,
+        arrows: true,
+        autoplay: true,
+        interval: 4000,
+        pauseOnHover: false,
+        lazyLoad: 'nearby',
+        classes: {
+
+        }
+      }).mount();
+
+      mainSlider.on('moved', event => {
+        counter.innerHTML = event + 1;
+    });
     }
+  </script>
+
+<style lang="scss">
     .mpp-banners {
+        margin: 0 0 2rem;
+    }
+    .mpp-banners-wrap {
         @media (min-width: 768px) {
             display: grid;
-            grid-template-columns: 1fr 300px;
+            grid-template-columns: 2fr 1fr;
             grid-template-areas: "m s1" "m s2";
             grid-gap: 1.25rem 1.625rem;
         }
-        
     }
-    .mpp-banner-side:nth-child(1) {
-        grid-area: s1;
-    }
-    .mpp-banner-side:nth-child(2) {
-        grid-area: s2;
-    }
-    .mpp-main-slide-item {
+    .mpp-side-banner {
         position: relative;
-
-        
+        border-radius: 15px;
+        overflow: hidden;
+        &[data-index="1"] {
+            grid-area: s1
+        }
+        &[data-index="2"] {
+            grid-area: s2;
+            & .mpp-side-banner__body {
+                width: 40%;
+            }
+        }
         & img {
-            overflow: hidden;
-            border-radius: 15px;
-            background: linear-gradient(360deg, #d9d9d9 0%, #737373 100%);
             object-fit: cover;
-            min-height: 350px;
+            height: 100%;
         }
-    }
-    .mpp-main-slide-item__body {
-        position: absolute;
-        left: 1rem;
-        right: 1rem;
-        top: 1.5rem;
-        
-        & > p {
-            font-size: .875em;
-            line-height: 160%;
-        }
-    }
-    .mpp-banner-side {
         @media (max-width: 768px) {
             display: none;
         }
     }
-    .mpp-main-slide-item__button {
+    .mpp-side-banner__body {
         position: absolute;
+        top: 2em;
+        left: 2em;
+        right: 2em;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+    .mpp-main-slider {
+        grid-area: m;
+        height: 100%;
+    }
+    .mpp-main-slide-item {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(360deg, #d9d9d9 0%, #737373 100%);
+            mix-blend-mode: multiply;
+            opacity: .4;
+            @media (min-width: 768px) {
+                background: linear-gradient(180deg, #fff 0%, #fff 0%, #515151 100%);
+            }
+        }
+
+        & img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .splide__pagination {
+        display: none;
+    }
+
+    .mpp-main-slide-item__body {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: 700;
+        color: #FFFFFF;
+        right: 2rem;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 2rem;
+        height: 100%;
+        justify-content: space-between;
+        @media (min-width: 768px) {
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+        & .btn {
+            order: 2;
+            @media (min-width: 768px) {
+                display: none;
+            }
+            
+        }
+    }
+    .mpp-navigation-arrows {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 100%;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 0;
-        background-color: #F3704E;
-        color: #f1f3f8;
-        font-size: .88rem;
-        min-width: 252px;
-        text-align: center;
-        min-height: 3rem;
-        border-radius: 99px;
-        font-weight: 700;
-        padding: 1.1em 0;
-        bottom: 4em;
+        margin: 0.5em 0 0;
+        gap: 0.7em;
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+    .mpp-navigation-count {
+        font-size: .875rem;
+        font-weight: 500;
+    }
+
+    .mpp-navigation-arrow {
+        border: none;
+        background: transparent;
+        position: static;
+        transform: translateY(0);
+    }
+    .mpp-navigation-arrow-left {
+
+    }
+
+    .mpp-main-slide-item-link-block {
+        display: block;
+        height: 100%;
+    }
+</style>
+<style is:global lang="scss">
+    .mpp-main-slider .splide__pagination {
+        @media (min-width: 768px) {
+            display: none;
+        }
+        
+    }
+    .mpp-main-slider .splide__track {
+        height: 100%;
+    }
+    .mpp-main-slider .splide__list {
+        height: 100%;
     }
 </style>

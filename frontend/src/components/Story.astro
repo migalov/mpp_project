@@ -6,7 +6,7 @@ const { label, url, src, minPrice, bgColor } = Astro.props;
         !bgColor ? 
         <a href={url}>
             <figure>
-                <img src={src} alt="">
+                <img src={src} alt="" />
                 <figcaption>{label}<br>от {minPrice} ₽</figcaption>
             </figure>
         </a> :

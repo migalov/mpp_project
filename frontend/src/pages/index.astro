@@ -9,9 +9,11 @@ import Feature from "../components/Feature.astro";
 import SEOBlockModelOne from "../components/SEOBlockModelOne.astro";
 import Story from "../components/Story.astro";
 import TwoColumnsSEOText from "../components/TwoColumnsSEOText.astro";
+import GridBanners from "../components/GridBanners.astro";
 
 const response = await fetch(`http://localhost:1337/api/main-page?populate%5BContent%5D%5Bpopulate%5D=%2A`).then(res => res.json());
 const data = response.data;
+
 ---
 
 <BaseLayout>
@@ -23,6 +25,13 @@ const data = response.data;
 		{
 			data.attributes.Content.map( block =>
 				<>
+					{
+						(block?.MainSlider || block?.SideBanner) &&
+							<GridBanners
+								mainSliderData={block?.MainSlider}
+								sideBannersData={block?.SideBanner}
+							/>
+					}
 					{
 						block.Stories &&
 							<section class="mpp-stories">
@@ -92,11 +101,6 @@ const data = response.data;
         @media (min-width: 768px) {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-        }
-
-        @media (min-width: 1200px) {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
         }
     }
 

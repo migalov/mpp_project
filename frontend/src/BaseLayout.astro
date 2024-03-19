@@ -8,9 +8,11 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<slot />
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 	</body>
 </html>
 
@@ -55,7 +57,7 @@
         margin: 0 auto;
         
         padding: 0 2rem;
-           max-width: 1440px;
+           max-width: 1024px;
     }
     .alert.alert-danger {
         display: none;
@@ -76,5 +78,13 @@
             background-color: #F3704E;
             color: #FFFFFF;
         }
+    }
+    .btn-mobile {
+        font-size: .875rem;
+        background-color: #F3704E;
+        color: #FFFFFF;
+        height: 3em;
+        min-width: 252px;
+        border-radius: 1.5em;
     }
 </style>
