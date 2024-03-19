@@ -1,6 +1,11 @@
+---
+const {firstColumn, secondColumn} = Astro.props;
+---
+
 <div class="mpp-seo-text-2-columns">
     <div class="mpp-seo-text-2-columns-wrap container">
-        
+        <div class="mpp-seo-column" set:html={firstColumn} />
+        <div class="mpp-seo-column" set:html={secondColumn} />
     </div>
 </div>
 
@@ -8,11 +13,18 @@
     .mpp-seo-text-2-columns {
         line-height: 1.7;
         overflow: hidden;
-        max-height: 150px;
     }
 
     .mpp-seo-text-2-columns-wrap {
-        column-count: 2;
-        overflow: hidden;
+        @media (min-width: 768px) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.83em;
+            max-height: 4em;
+        }
+    }
+
+    .mpp-seo-column {
+        font-size: .75rem;
     }
 </style>

@@ -1,9 +1,4 @@
 ---
-import Home from "./icons/nav-mobile/Home.astro";
-import Products from "./icons/nav-mobile/Products.astro";
-import Cabinet from "./icons/nav-mobile/Cabinet.astro";
-import Cart from "./icons/nav-mobile/Cart.astro";
-
 const response = await fetch(`http://localhost:1337/api/navigation/render/mobile-bottom-navigation`);
 const data = await response.json();
 ---

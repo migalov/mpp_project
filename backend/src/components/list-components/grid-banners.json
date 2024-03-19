@@ -7,7 +7,12 @@
   },
   "options": {},
   "attributes": {
-    "Banner": {
+    "MainSlider": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ui-blocks.banner"
+    },
+    "SideBanner": {
       "type": "component",
       "repeatable": true,
       "component": "ui-blocks.banner"

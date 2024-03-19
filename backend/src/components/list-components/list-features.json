@@ -2,7 +2,8 @@
   "collectionName": "components_list_components_list_features",
   "info": {
     "displayName": "ListFeatures",
-    "icon": "stack"
+    "icon": "stack",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -10,6 +11,9 @@
       "type": "component",
       "repeatable": true,
       "component": "ui-blocks.features"
+    },
+    "title": {
+      "type": "string"
     }
   }
 }

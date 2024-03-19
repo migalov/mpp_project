@@ -1,14 +1,13 @@
+---
+const { src, body, button } = Astro.props
+---
 <div class="mpp-simple-seo-block-model-1 container">
 
-    <img src="https://static.wow2print.com/storage/445/content/image/59471330665e881cc942ea5.07544289.webp" />
+    <img src={src} />
 
     <div class="mpp-simple-seo-block-model-1-side">
-        <div class="mpp-simple-seo-block-model-1-body">
-            <h3>Фотокнига за вас</h3>
-            <p>Если у вас нет времени самостоятельно создать фотокнигу в онлайн-редакторе, наши дизайнеры сделают за вас.</p>
-            <p>Воспользуйтесь услугой «Фотокнига за вас». Готовый макет от дизайнера будет в вашем личном кабинете, который можно сразу отправить в печать</p>
-        </div>
-        <a class="btn btn-default" href="#" target="_blank" rel="noopener noreferrer">Подробнее</a>
+        <div class="mpp-simple-seo-block-model-1-body" set:html={body} />
+        <a class="btn btn-default" href={button.link} target="_blank" rel="noopener noreferrer">{button.label}</a>
     </div>
 
 </div>
@@ -58,5 +57,17 @@
         font-weight: 700;
         min-width: 120px;
         border-radius: 15px;
+    }
+</style>
+
+<style is:global lang="scss">
+    .mpp-simple-seo-block-model-1 {
+        & h3 {
+            margin: 0 0 0.6em;
+        }
+        & p {
+            font-size: .8125rem;
+            line-height: 1.5;
+        }
     }
 </style>

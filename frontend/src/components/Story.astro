@@ -1,0 +1,62 @@
+---
+const { label, url, src, minPrice, bgColor } = Astro.props;
+---
+<li>
+    {
+        !bgColor ? 
+        <a href={url}>
+            <figure>
+                <img src={src} alt="">
+                <figcaption>{label}<br>от {minPrice} ₽</figcaption>
+            </figure>
+        </a> :
+        <a class="allCategories" href={url}>{label}</a>
+    }
+</li>
+
+<style scoped lang="scss">
+    li {
+        position: relative;
+        transition: ease .5s;
+        @media (max-width: 768px) {
+            min-width: 265px;
+        }
+        
+    }
+
+    img {
+        border-radius: 15px;
+        object-fit: cover;
+    }
+    figure {
+        position: relative;
+    }
+
+    figcaption {
+        font-size: .8125rem;
+        font-weight: 700;
+        position: absolute;
+        left: 1.2em;
+        right: 1.2em;
+        top: 1.1em;
+        @media (min-width: 992px) {
+            font-size: 1rem;
+        }
+    }
+
+    .allCategories {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: #F3704E;
+        border-radius: 15px;
+        color: #FFFFFF;
+        font-size: .8125rem;
+        font-weight: 700;
+        @media (min-width: 992px) {
+            font-size: 1rem;
+        }
+    }
+</style>

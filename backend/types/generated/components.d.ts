@@ -8,7 +8,8 @@ export interface ListComponentsGridBanners extends Schema.Component {
     description: '';
   };
   attributes: {
-    Banner: Attribute.Component<'ui-blocks.banner', true>;
+    MainSlider: Attribute.Component<'ui-blocks.banner', true>;
+    SideBanner: Attribute.Component<'ui-blocks.banner', true>;
   };
 }
 
@@ -17,9 +18,11 @@ export interface ListComponentsListFeatures extends Schema.Component {
   info: {
     displayName: 'ListFeatures';
     icon: 'stack';
+    description: '';
   };
   attributes: {
     Features: Attribute.Component<'ui-blocks.features', true>;
+    title: Attribute.String;
   };
 }
 
@@ -28,9 +31,11 @@ export interface ListComponentsListStories extends Schema.Component {
   info: {
     displayName: 'ListStories';
     icon: 'apps';
+    description: '';
   };
   attributes: {
     Stories: Attribute.Component<'ui-blocks.story', true>;
+    title: Attribute.String;
   };
 }
 
@@ -153,6 +158,8 @@ export interface UiBlocksStory extends Schema.Component {
     src: Attribute.String;
     url: Attribute.String;
     minPrice: Attribute.BigInteger;
+    bgColor: Attribute.String &
+      Attribute.CustomField<'plugin::color-picker.color'>;
   };
 }
 
