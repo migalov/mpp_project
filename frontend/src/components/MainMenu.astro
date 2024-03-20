@@ -13,7 +13,7 @@ const data = await response.json();
                 data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
 
                 <li class="mpp-main-menu-item-lvl-1">
-                    <a href={item.path}>{item.title} {item.title === "Еще" && <Arrow />}</a>
+                    <a href={item.path.replace('https://myphotopages.ru', '')}>{item.title} {item.title === "Еще" && <Arrow />}</a>
                     {
                         (item.items && item.items.length > 0 && item.title !== "Еще") &&
                         <div class="mpp-main-menu-dropdown-lvl-2">
@@ -22,7 +22,7 @@ const data = await response.json();
                                     {
                                         item.items.map( _item => 
                                             <li class="mpp-main-menu-item-lvl-2">
-                                                <a href={_item.path}>{_item.title}</a>
+                                                <a href={_item.path.replace('https://myphotopages.ru', '')}>{_item.title}</a>
                                             </li>
                                         )
                                     }
@@ -91,17 +91,31 @@ const data = await response.json();
 <style is:global lang="scss">
     .mpp-main-menu {
         background: #FFFFFF;
-        position: fixed;
-        left: 0;
-        right: 0;
-        z-index: 10;
         @media (max-width: 768px) {
-            position: fixed;
-            top: calc(4em + 7px);
-            left: 0;
-            right: 0;
         }
 
+    }
+    .mpp-main-menu {
+        flex-basis: 100%;
+        @media (max-width:768px) {
+            border-top: 1px solid rgba(0,0,0,.25);
+            border-bottom: 1px solid rgba(0,0,0,.25);
+        }
+    }
+
+    .mpp-main-menu-wrapper {
+
+        @media (max-width:768px) {
+            overflow-x: auto;
+        }
+    }
+
+    .mpp-main-menu-list-lvl-1 {
+        display: flex;
+        gap: 1.2em;
+        & > a {
+            white-space: nowrap;
+        }
     }
     .mpp-main-menu-list-lvl-1 {
         & .mpp-main-desktop-menu-list-lvl-2 {
@@ -116,26 +130,32 @@ const data = await response.json();
         padding: 1em 0;
         @media (min-width: 768px) {
             .mpp-main-desktop-menu-list-lvl-2 {
-                display: block;
-                // z-index: -1;
-                transform: translateY(-2em);
+                position: absolute;
                 opacity: 0;
                 transition: ease .5s;
                 left: -1.2em;
-                top: 2.4em;
+                top: 0;
+                visibility: hidden;
+            }
+            &:hover .mpp-main-desktop-menu-list-lvl-2 {
+                display: block;
             }
             &:hover .mpp-main-menu-dropdown-lvl-2 {
                 opacity: 1;
-                transform: translateY(0);
-                z-index: 11;
+                display: block;
+                visibility: visible;
                 
             }
+            &:last-child:hover {
+                position: relative;
+            }
             &:hover .mpp-main-desktop-menu-list-lvl-2 {
-                z-index: 11;
                 transform: translateY(0);
-                left: -1.2em;
+                
                 top: 2.4em;
                 opacity: 1;
+                visibility: visible;
+
             }
             &:hover svg path{
                 stroke: #F3704E;
@@ -151,23 +171,27 @@ const data = await response.json();
                 margin-left: 2px;
             }
         }
+        
         &:last-child {
+            @media (max-width: 768px) {
+                display: none;
+            }
             position: relative;
             padding-right: 2em;
         }
     }
     .mpp-main-menu-dropdown-lvl-2 {
         position: absolute;
-        top: 100%;
+        top: calc(100% + 1rem);
         left: 0;
         right: 0;
         box-shadow: 0 11px 20px 0 rgba(0, 0, 0, 0.2);
         padding: 1.5rem 0 2.5rem;
-        z-index: -3;
         background: #FFFFFF;
         opacity: 0;
         transform: translateY(-1rem);
-        transition: ease .5s;
+        transition: all ease .3s;
+        visibility: hidden;
     }
     .mpp-main-menu-dropdown-lvl-2 ul {
         position: relative;

@@ -2,7 +2,7 @@
 ---
 const { src, body } = Astro.props
 ---
-<li>
+<li class="mpp-feature-item">
     <img src={src} />
     <div class="mpp-feature-body" set:html={body} />
 </li>
@@ -35,7 +35,7 @@ const { src, body } = Astro.props
     }
 </style>
 
-<style lang="scss" is:global>
+<style lang="scss" >
     .mpp-feature-body {
         & > h3 {
             font-family: "Montserrat";
