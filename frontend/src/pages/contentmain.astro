@@ -5,6 +5,8 @@ import SEOBlockModelOne from "../components/SEOBlockModelOne.astro";
 import Story from "../components/Story.astro";
 import TwoColumnsSEOText from "../components/TwoColumnsSEOText.astro";
 import Feature from '../components/Feature.astro';
+import GetPhotoProductsOnlyMobile from '../components/GetPhotoProducts.astro';
+import GiftSertificate from '../components/GiftSertificate.astro';
 
 const response = await fetch(`http://localhost:1337/api/main-page?populate%5BContent%5D%5Bpopulate%5D=%2A`).then(res => res.json());
 const data = response.data;
@@ -57,10 +59,13 @@ const data = response.data;
                     block.__component === "ui-blocks.seo-block-model-2" &&
                     <TwoColumnsSEOText {...block} />
                 }
+                
             </>
             
         )
     }
+    <GetPhotoProductsOnlyMobile />
+    <GiftSertificate />
 </BaseLayout>
 
 <style scoped lang="scss">

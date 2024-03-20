@@ -13,6 +13,23 @@
 	<body>
 		<slot />
         <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+        <script>
+            const fixedHeaders = () => {
+                let mainMenuBlock = document.querySelector('.mpp-main-menu');
+                let menuDesktopBlock = document.querySelector('.mpp-header-desktop');
+                let menuMobileBlock = document.querySelector('.mpp-header-mobile');
+                let menuMobileBottomNavigation = document.querySelector('.mpp-bottom-nav-panel')
+
+                let isMobile = window.innerWidth < 768;
+                
+                mainMenuBlock.style.top = `${(!isMobile && menuDesktopBlock.clientHeight) + (isMobile && menuMobileBlock.clientHeight)}px`;
+                document.body.style.paddingTop = `${(!isMobile && menuDesktopBlock.clientHeight) + (isMobile && menuMobileBlock.clientHeight) + mainMenuBlock.clientHeight}px`;
+                document.body.style.paddingBottom = `${isMobile ? menuMobileBottomNavigation.clientHeight : 0}px`
+            }
+            window.addEventListener('load', fixedHeaders);
+            window.addEventListener('resize', fixedHeaders);
+
+        </script>
 	</body>
 </html>
 
@@ -30,9 +47,6 @@
         color: #000;
         font-family: "Montserrat", sans-serif;
         min-height: 200vh;
-    }
-    header {
-        z-index: auto;
     }
     ol, ul, dl {
         margin: 0;

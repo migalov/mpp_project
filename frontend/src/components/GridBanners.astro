@@ -6,14 +6,14 @@ import Arrow from '../components/icons/slider/Arrow.astro'
 
 <div class="mpp-banners">
     <div class="mpp-banners-wrap container">
-        <section class="mpp-main-slider splide" aria-label="Splide Basic HTML Example">
+        <section class="mpp-main-slider mpp-main-slider-desktop splide">
             <div class="splide__track">
                 <ul class="splide__list">
                     {
                         mainSliderData?.map( (item, index) =>
                             <li class="mpp-main-slide-item splide__slide" data-number={index}>
                                 <a class="mpp-main-slide-item-link-block" href={item.linkButton}>
-                                    <img src={item.srcDesktop} alt="" />
+                                    <img loading="lazy" src={item.srcDesktop} alt="" />
                                     <div class="mpp-main-slide-item__body" set:html={item.body}>
                                         <span class="btn btn-mobile">{item.labelButton}</span>
                                     </div>
@@ -36,6 +36,38 @@ import Arrow from '../components/icons/slider/Arrow.astro'
                 </button>
             </div>
         </section>
+        <section class="mpp-main-slider mpp-main-slider-mobile splide">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {
+                        mainSliderData?.map( (item, index) =>
+                            <li class="mpp-main-slide-item splide__slide" data-number={index}>
+                                <a class="mpp-main-slide-item-link-block" href={item.linkButton}>
+                                    <img loading="lazy" src={item.srcDesktop} alt="" />
+                                    <div class="mpp-main-slide-item__body" set:html={item.body}>
+                                        <span class="btn btn-mobile">{item.labelButton}</span>
+                                    </div>
+                                    
+                                </a>
+                            </li>
+                        )
+                    }
+                    {
+                        sideBannersData?.map( (item, index) =>
+                            <li class="mpp-main-slide-item splide__slide" data-number={index}>
+                                <a class="mpp-main-slide-item-link-block" href={item.linkButton}>
+                                    <img src={item.srcDesktop} alt="" />
+                                    <div class="mpp-main-slide-item__body" set:html={item.body}>
+                                        <span class="btn btn-mobile">{item.labelButton}</span>
+                                    </div>
+                                    
+                                </a>
+                            </li>
+                        )
+                    }
+              </ul>
+            </div>
+        </section>
         {
             sideBannersData?.map( (item, index) =>
                 <div class="mpp-side-banner" data-index={index+1}>
@@ -52,7 +84,7 @@ import Arrow from '../components/icons/slider/Arrow.astro'
 
     const counter = document.querySelector('.mpp-navigation-count__current');
     window.onload = () => {
-      const mainSlider = new Splide('.splide', {
+      const mainSliderDesktop = new Splide('.mpp-main-slider-desktop', {
         type: 'fade',
         rewind: true,
         arrows: true,
@@ -61,11 +93,22 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         pauseOnHover: false,
         lazyLoad: 'nearby',
         classes: {
-
         }
       }).mount();
 
-      mainSlider.on('moved', event => {
+      const mainSliderMobile = new Splide('.mpp-main-slider-mobile', {
+        type: 'fade',
+        rewind: true,
+        arrows: false,
+        autoplay: false,
+        interval: 4000,
+        pauseOnHover: false,
+        lazyLoad: 'nearby',
+        classes: {
+        }
+      }).mount();
+
+      mainSliderDesktop.on('moved', event => {
         counter.innerHTML = event + 1;
     });
     }
@@ -73,7 +116,10 @@ import Arrow from '../components/icons/slider/Arrow.astro'
 
 <style lang="scss">
     .mpp-banners {
-        margin: 0 0 2rem;
+        padding: 1.5rem 0 2rem;
+        @media (min-width: 768px) {
+            padding: .5rem 0 2rem;
+        }
     }
     .mpp-banners-wrap {
         @media (min-width: 768px) {
@@ -112,9 +158,20 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         font-weight: 600;
         line-height: 1.5;
     }
-    .mpp-main-slider {
+    .mpp-main-slider.mpp-main-slider {
         grid-area: m;
         height: 100%;
+    }
+
+    .mpp-main-slider.mpp-main-slider-desktop {
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+    .mpp-main-slider-mobile {
+        @media (min-width: 768px) {
+            display: none;
+        }
     }
     .mpp-main-slide-item {
         position: relative;
@@ -136,7 +193,11 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         & img {
             object-fit: cover;
             width: 100%;
-            height: 100%;
+            min-height: 230px;
+            @media (min-width: 768px) {
+                min-height: 100%;
+            }
+            
         }
     }
     .splide__pagination {

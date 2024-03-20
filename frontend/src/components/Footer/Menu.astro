@@ -62,13 +62,16 @@ const data = await response.json();
         display: block;
         flex: inherit;
         &:nth-child(2) {
-            margin-left: clamp(32px, calc(2rem + ((1vw - 7.68px) * 14.2857)), 128px);
+            // margin-left: clamp(32px, calc(2rem + ((1vw - 7.68px) * 14.2857)), 128px);
+            margin-left: 32px;
         }
         &:nth-child(3) {
-            margin-left: clamp(6px, calc(0.375rem + ((1vw - 7.68px) * 2.6786)), 24px);
+            // margin-left: clamp(6px, calc(0.375rem + ((1vw - 7.68px) * 2.6786)), 24px);
+            margin-left: 6px;
         }
         &:nth-child(4), &:nth-child(5) {
-            margin-left: clamp(20px, calc(1.25rem + ((1vw - 7.68px) * 8.9286)), 80px);;
+            // margin-left: clamp(20px, calc(1.25rem + ((1vw - 7.68px) * 8.9286)), 80px);
+            margin-left: 20px;
         }
     }
 }

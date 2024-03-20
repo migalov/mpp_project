@@ -8,7 +8,7 @@ const data = await response.json();
         {
             data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
                 <li class="mpp-main-mobile-menu-item-lvl-1">
-                    <a href={item.path}>{item.title}</a>
+                    <a href={item.path.replace('/#', '')}>{item.title}</a>
                         {
                             item?.items?.length > 0 && 
                             <input id={`dropdown-list-${item.id}`} class="mpp-main-mobile-toggle" type="checkbox" value="" />
@@ -19,7 +19,7 @@ const data = await response.json();
                             {
                                 item.items.map( (_item: { path: string | URL; title: unknown; }) =>
                                     <li class="mpp-main-mobile-menu-item-lvl-2 ">
-                                        <a href={_item.path}>{ _item.title }</a>
+                                        <a href={_item.path.replace('/#', '')}>{ _item.title }</a>
                                     </li>
                                 )
                             }
@@ -39,7 +39,7 @@ const data = await response.json();
     padding: .6rem 0;
     font-size: .75em;
     font-weight: 600;
-    // z-index: 2;
+    z-index: 10;
     @media (min-width: 768px) {
         display: none;
     }
@@ -79,8 +79,6 @@ const data = await response.json();
 }
 
 .mpp-main-menu-wrapper {
-    /* position: relative; */
-    padding: .5em 0;
 
     @media (max-width:768px) {
         overflow-x: auto;

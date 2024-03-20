@@ -27,7 +27,7 @@ const data = await response.json();
                                         {
                                             item.items.map( (_item: { path: string | URL; title: unknown; }) =>
                                                 <li>
-                                                    <a href={_item.path}>{ _item.title }</a>
+                                                    <a href={_item.path.replace("/#", "")}>{ _item.title }</a>
                                                 </li>
                                             )
                                         }
@@ -81,8 +81,13 @@ const data = await response.json();
 
 <style is:global lang="scss">
     .mpp-header-desktop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
         background: #FFFFFF;
         padding: 1rem 0 0;
+        z-index: 10;
         @media (max-width: 768px) {
             display: none;
         }

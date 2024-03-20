@@ -15,7 +15,7 @@ const data = await response.json();
                 <li class="mpp-main-menu-item-lvl-1">
                     <a href={item.path}>{item.title} {item.title === "Еще" && <Arrow />}</a>
                     {
-                        (item.items && item.title !== "Еще") &&
+                        (item.items && item.items.length > 0 && item.title !== "Еще") &&
                         <div class="mpp-main-menu-dropdown-lvl-2">
                             <div class="mpp-main-menu-dropdown-wrap-lvl-2 container">
                                 <ul class="mpp-main-menu-list-lvl-2">
@@ -91,7 +91,10 @@ const data = await response.json();
 <style is:global lang="scss">
     .mpp-main-menu {
         background: #FFFFFF;
-        position: relative;
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 10;
         @media (max-width: 768px) {
             position: fixed;
             top: calc(4em + 7px);
@@ -124,11 +127,11 @@ const data = await response.json();
             &:hover .mpp-main-menu-dropdown-lvl-2 {
                 opacity: 1;
                 transform: translateY(0);
-                // z-index: 10;
+                z-index: 11;
                 
             }
             &:hover .mpp-main-desktop-menu-list-lvl-2 {
-                // z-index: 10;
+                z-index: 11;
                 transform: translateY(0);
                 left: -1.2em;
                 top: 2.4em;
@@ -160,7 +163,7 @@ const data = await response.json();
         right: 0;
         box-shadow: 0 11px 20px 0 rgba(0, 0, 0, 0.2);
         padding: 1.5rem 0 2.5rem;
-        // z-index: -3;
+        z-index: -3;
         background: #FFFFFF;
         opacity: 0;
         transform: translateY(-1rem);
