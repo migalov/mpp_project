@@ -7,11 +7,11 @@ const data = await response.json();
 <ul class="mpp-footer-doc">
     {
         data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
-            <li class="mpp-footer-menu-item-doc">
+            <li style={`grid-area: area-${item.id}`} class="mpp-footer-menu-item-doc">
                 {
                     item.path !== "#" ?
-                        <a href={item.path}>{item.title}</a> :
-                        item.title
+                        <a id={item?.externalPath?.replace("#", "")} data-id={item.id} href={item.path}>{item.title}</a> :
+                        <span>{item.title}</span>
                 }
                 
             </li> 
@@ -22,21 +22,30 @@ const data = await response.json();
 <style  lang="scss">
     .mpp-footer-doc {
         @media (min-width: 768px) {
-            display: flex;
-            flex-direction: row;
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            grid-template-rows: repeat(2, 1fr);
+            grid-template-areas: "area-113 area-84 area-86"
+                                    "area-85 area-85 area-87";
+            grid-gap: .5em;
+        }
+        @media (min-width: 992px) {
+            grid-template-columns: repeat(5, auto);
             justify-content: space-between;
+            grid-template-areas: "area-85 area-113 area-84 area-86 area-87";
         }
-        @media (min-width: 768px) and (max-width: 992px) {
-            flex-wrap: wrap;
-            gap: .5em 0;
-        }
+        // @media (min-width: 768px) and (max-width: 992px) {
+
+        //     flex-wrap: wrap;
+        //     gap: .5em 0;
+        // }
         @media (min-width: 992px) {
             margin-top: 1.2em;
         }
     }
 
     .mpp-footer-menu-item-doc {
-        &:nth-child(2n+3) {
+        &:nth-child(2n+4) {
             @media (max-width: 768px) {
                 margin: 1em 0 0;
             }
@@ -50,10 +59,13 @@ const data = await response.json();
         & a:hover {
             text-decoration: none;
         }
-        @media (min-width: 768px) {
-            &:nth-child(3) {
-                order: -2;
-            }
+
+        & span:hover {
+            color: inherit;
         }
+    }
+
+    #sitemap {
+        cursor: pointer;
     }
 </style>

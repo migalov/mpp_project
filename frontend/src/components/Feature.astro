@@ -7,8 +7,8 @@ const { src, body } = Astro.props
     <div class="mpp-feature-body" set:html={body} />
 </li>
 
-<style scoped lang="scss">
-    li {
+<style lang="scss">
+    .mpp-feature-item {
         background: #fff;
         border-radius: 15px;
         overflow: hidden;
@@ -24,25 +24,26 @@ const { src, body } = Astro.props
         &:hover {
             outline: 1px solid #F8714C;
         }
+        img {
+            object-fit: cover;
+            height: 175px;
+            width: 100%;
+        }
     }
-    img {
-        object-fit: cover;
-        height: 175px;
-        width: 100%;
-    }
+    
     .mpp-feature-body {
         padding: 0.45em 1em 1em;
     }
 </style>
 
-<style lang="scss" >
+<style is:global lang="scss" >
     .mpp-feature-body {
-        & > h3 {
+        & h3 {
             font-family: "Montserrat";
             font-size: .875rem;
             font-weight: 600;
         }
-        & > p {
+        & p {
             font-size: .625rem;
             line-height: 1.4;
             margin: 0.6em 0 0 0;

@@ -64,8 +64,8 @@ const data = await response.json();
         <div class="mpp-header-desktop-menu-bottom-right">
             <ul class="mpp-header-desktop-contacts">
                 <li class="mpp-header-desktop-contacts__phone"><a href="tel:88007750861"><Phone /> 8 (800) 775 08 61</a></li>
-                <li class="mpp-header-desktop-contacts__time"><Clock /> ежедневно 10:00-20:00</li>
-                <li class="mpp-header-desktop-contacts__mail"><a href="support@myphotopages.ru"><Mail /> support@myphotopages.ru</a></li>
+                <li class="mpp-header-desktop-contacts__time"><span><Clock /> ежедневно 10:00-20:00</span></li>
+                <li class="mpp-header-desktop-contacts__mail"><a href="mailto:support@myphotopages.ru"><Mail /> support@myphotopages.ru</a></li>
             </ul>
             <div class="mpp-header-desktop-user-actions">
                 <a class="mpp-header-desktop-btn-login" href="/">
@@ -147,9 +147,12 @@ const data = await response.json();
         width: 6px;
     }
 
+    & > a {
+        font-size: .625rem;
+        font-weight: 500;
+    }
+
     &:hover {
-        & > a {
-        }
         & .mpp-main-desktop-menu-list-lvl-2 {
             display: flex;
             opacity: 1;
@@ -199,14 +202,17 @@ const data = await response.json();
     align-items: start;
     gap: 1.5em;
 
-    & a {
+    & a, & span {
         display: flex;
         align-items: center;
         gap: .5em;
+        font-size: .625rem;
     }
 
     & > li {
-        font-size: .625rem;
+        display: flex;
+        align-items: center;
+
     }
     @media (min-width: 768px) and (max-width: 992px) {
         flex-direction: column;

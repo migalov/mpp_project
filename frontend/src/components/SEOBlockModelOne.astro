@@ -16,7 +16,7 @@ const { src, body, button } = Astro.props
 
 </div>
 
-<style lang="scss" >
+<style scoped lang="scss" >
     .mpp-simple-seo-block-model-1 {
         padding: 1.8125rem 0;
     }
@@ -39,7 +39,6 @@ const { src, body, button } = Astro.props
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         align-items: flex-start;
         @media (max-width: 768px) {
             margin: .5rem 0 0;
@@ -56,7 +55,7 @@ const { src, body, button } = Astro.props
     }
 
     .btn {
-        margin: .5rem 0 0;
+        margin: .75rem 0 0;
         height: 34px;
         transition: ease .5s;
         font-weight: 700;
@@ -72,15 +71,20 @@ const { src, body, button } = Astro.props
     }
 </style>
 
-<style  lang="scss">
+<style is:global lang="scss">
     .mpp-simple-seo-block-model-1 {
         & h3 {
-            margin: 0 0 0.6em;
+            margin: 0 0 1em;
             font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
         }
         & p {
             font-size: .8125rem;
             line-height: 1.5;
+        }
+
+        & .btn {
+            font-size: .875rem;
         }
     }
 </style>

@@ -1225,6 +1225,37 @@ export interface ApiMainPageMainPage extends Schema.SingleType {
   };
 }
 
+export interface ApiSectionMenuSectionMenu extends Schema.CollectionType {
+  collectionName: 'section_menus';
+  info: {
+    singularName: 'section-menu';
+    pluralName: 'section-menus';
+    displayName: 'Section Menu';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    heading: Attribute.String;
+    links: Attribute.Component<'menu.item-menu', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::section-menu.section-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::section-menu.section-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiStoryStory extends Schema.CollectionType {
   collectionName: 'stories';
   info: {
@@ -1284,6 +1315,7 @@ declare module '@strapi/types' {
       'api::feature.feature': ApiFeatureFeature;
       'api::global-navigation.global-navigation': ApiGlobalNavigationGlobalNavigation;
       'api::main-page.main-page': ApiMainPageMainPage;
+      'api::section-menu.section-menu': ApiSectionMenuSectionMenu;
       'api::story.story': ApiStoryStory;
     }
   }

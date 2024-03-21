@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_menu_list_items_menus",
+  "info": {
+    "displayName": "List Items Menu",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "itemMenu": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.item-menu"
+    }
+  }
+}

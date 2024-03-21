@@ -44,11 +44,22 @@ export interface MenuItemMenu extends Schema.Component {
   info: {
     displayName: 'Item Menu';
     icon: 'link';
+    description: '';
   };
   attributes: {
     label: Attribute.String;
     link: Attribute.String;
-    previews: Attribute.Media;
+  };
+}
+
+export interface MenuListItemsMenu extends Schema.Component {
+  collectionName: 'components_menu_list_items_menus';
+  info: {
+    displayName: 'List Items Menu';
+    icon: 'bulletList';
+  };
+  attributes: {
+    itemMenu: Attribute.Component<'menu.item-menu', true>;
   };
 }
 
@@ -182,6 +193,7 @@ declare module '@strapi/types' {
       'list-components.list-features': ListComponentsListFeatures;
       'list-components.list-stories': ListComponentsListStories;
       'menu.item-menu': MenuItemMenu;
+      'menu.list-items-menu': MenuListItemsMenu;
       'ui-blocks.banner': UiBlocksBanner;
       'ui-blocks.features': UiBlocksFeatures;
       'ui-blocks.seo-block-model-1': UiBlocksSeoBlockModel1;
