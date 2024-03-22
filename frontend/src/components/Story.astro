@@ -3,21 +3,22 @@ const { label, url, src, minPrice, bgColor } = Astro.props;
 ---
 <li>
     {
-        !bgColor ? 
-        <a href={url} style={`background-image:url(${src})`} >
+        (!bgColor) ? 
+        <a href={url} style={`background-image:url(${src})`}>
             <p>{label}<br>от {minPrice} ₽</p>
         </a> :
         <a class="allCategories" href={url}>{label}</a>
     }
 </li>
 
-<style  lang="scss">
+<style scoped lang="scss">
     a {
         display: block;
         height: 240px;
         border-radius: 15px;
         background-size: cover;
-        background-position: center;
+        background-position: top center;
+        background-repeat: no-repeat;
         padding: 1.3em;
         @media (min-width: 768px) {
             height: 300px;

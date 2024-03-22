@@ -22,12 +22,11 @@ const data = response.data;
 
 <BaseLayout>
 	<div class="mpp-headers">
-		<!-- <DesktopHeader />
+		<DesktopHeader />
 		<MobileHeader />
-		<MainMenu /> -->
+		<MainMenu />
 	</div>
-	<main>
-		<!-- {
+		{
 			data.attributes.Content.map( block =>
 				<>
 					{
@@ -40,10 +39,8 @@ const data = response.data;
 					{
 						block.Stories &&
 							<section class="mpp-stories">
-								<div class="container">
 									<h2>{block.title}</h2>
-								</div>
-								<div class="mpp-stories-wrap container">
+								<div class="mpp-stories-wrap">
 									<ul class="mpp-stories-grid">
 										{block.Stories?.map( item => <Story {...item} />)}
 									</ul>
@@ -52,7 +49,7 @@ const data = response.data;
 					}
 					{
 						block.Features &&
-							<section class="mpp-features">
+							<section class="mpp-features full-width">
 								<div class="container">
 									<h2>{block.title}</h2>
 								</div>
@@ -68,19 +65,17 @@ const data = response.data;
 						<SEOBlockModelOne {...block} />
 					}
 					{
-						block.__component === "ui-blocks.seo-block-model-2" &&
-						<TwoColumnsSEOText {...block} />
+						// block.__component === "ui-blocks.seo-block-model-2" &&
+						// <TwoColumnsSEOText {...block} />
 					}
 				</>
 				
 			)
 		}
-		<YandexWidgets />
+		<!-- <YandexWidgets />
 		<GetPhotoProducts />
 		<GiftSertificate /> -->
-		<SiteMap />
-	</main>
-	<!-- <MobilePanel />-->
+	<MobilePanel />
 	<Footer /> 
 </BaseLayout>
 

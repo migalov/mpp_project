@@ -2,7 +2,7 @@
 const { src, body, button } = Astro.props
 ---
 <div class="mpp-simple-seo-block-model-1">
-    <div class="mpp-simple-seo-block-model-1-wrap container">
+    <div class="mpp-simple-seo-block-model-1-wrap">
         <img loading="lazy" src={src} />
 
         <div class="mpp-simple-seo-block-model-1-side">
@@ -19,11 +19,15 @@ const { src, body, button } = Astro.props
 <style scoped lang="scss" >
     .mpp-simple-seo-block-model-1 {
         padding: 1.8125rem 0;
+        @media (min-width: 992px) {
+            padding: 2.3125rem 0;
+        }
     }
+    
     .mpp-simple-seo-block-model-1-wrap {
         
         @media (min-width: 992px) {
-            padding: 2.3125rem 2rem;
+            
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 28px;

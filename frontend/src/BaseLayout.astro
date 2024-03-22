@@ -11,7 +11,11 @@
         <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 	</head>
 	<body>
-		<slot />
+        <div class="container">
+            <div class="content-html-source">
+                <slot />
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
         <script>
             const fixedHeaders = () => {
@@ -25,6 +29,23 @@
             }
             window.addEventListener('load', fixedHeaders);
             window.addEventListener('resize', fixedHeaders);
+
+            const siteMapBlock = document.querySelector('.mpp-sitemap');
+            const linkSiteMapBlock = document.querySelector('#sitemap');
+            const closeSiteMapBlock = document.querySelector('.mpp-sitemap-close-button');
+            const gridFooterWrap = document.querySelector('.mpp-footer-wrap');
+
+            const toggleSiteMapBlock = () => {
+                gridFooterWrap.classList.toggle("mpp-footer-wrap--show-sitemap");
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+
+            console.log(siteMapBlock);
+            
+            closeSiteMapBlock.addEventListener("click", toggleSiteMapBlock);
+            linkSiteMapBlock.addEventListener("click", toggleSiteMapBlock);
+
+
         </script>
 	</body>
 </html>
@@ -46,7 +67,6 @@
         margin: 0;
         color: #000;
         font-family: "Montserrat", sans-serif;
-        min-height: 200vh;
     }
     ol, ul, dl {
         margin: 0;
@@ -71,7 +91,7 @@
         margin: 0 auto;
         
         padding: 0 2rem;
-           max-width: 1024px;
+           max-width: 1270px;
     }
     .alert.alert-danger {
         display: none;

@@ -6,7 +6,7 @@ const data = response.data;
 ---
 
 <div class="mpp-sitemap">
-    <div class="mpp-sitemap-title  container">
+    <div class="mpp-sitemap-title">
         <button class="mpp-sitemap-close-button">
             <Close />
         </button>
@@ -33,9 +33,8 @@ const data = response.data;
 
         background-color: #F0F0F0;
         padding: 1.5em 0;
-        height: calc(100vh - 7em);
-        margin: 2em;
-
+        // margin: 2em;
+        
         & h4 {
             font-size: .75rem;
             font-weight: 700;
@@ -46,6 +45,7 @@ const data = response.data;
                 display: block;
                 font-size: 1.5rem;
                 font-weight: 500;
+                padding: 0 2em;
             }
         }
         
@@ -65,6 +65,7 @@ const data = response.data;
     .mpp-sitemap-title {
         position: relative;
         width: 100%;
+        overflow: hidden;
 
         & button {
             position: absolute;
@@ -76,13 +77,15 @@ const data = response.data;
     }
 
     .mpp-sitemap-close-button {
-        @media (min-width: 768px) {
-            display: none;
-        }
+        // @media (min-width: 768px) {
+        //     display: none;
+        // }
     }
 
     .mpp-sitemmap-wrap {
 
+        width: 100%;
+        
         overflow-y: auto;
         flex: 1;
 
