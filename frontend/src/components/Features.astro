@@ -3,11 +3,9 @@
 const { title, features } = Astro.props
 ---
 
-<section class="mpp-features full-width">
-    <div class="container">
-        <h2>{title}</h2>
-    </div>
-    <div class="mpp-features-wrap container">
+<section class="mpp-features">
+    <h2>{title}</h2>
+    <div class="mpp-features-wrap">
         <ul class="mpp-features-grid">
             {
                 features.map(item => 
@@ -29,26 +27,39 @@ const { title, features } = Astro.props
 
 <style lang="scss">
     .mpp-features {
+        position: relative;
 		padding: 2em 0;
-		background-color: #F8714C;
 		h2 {
 			font-size: 1.25rem;
 			font-weight: 500;
 			color: #fff;
 			margin: 0 0 .5em;
-            @media (max-width: 992px) {
-                margin: 0 .5rem 0 .5rem;
-            }
+            font-family: "Montserrat", sans-serif;
+            position: relative;
+            z-index: 1;
 		}
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -4rem;
+            height: 100%;
+            width: calc(100vw + 4rem);
+            z-index: 0;
+            background-color: #F8714C;
+            @media (min-width: 768px) {
+                width: calc(100vw + 50%);
+                left: -50%;
+                right: 50%;
+            }
+        }
 
 	}
 
     .mpp-features-wrap {
         overflow-x: auto;
-        @media (max-width: 992px) {
-            padding: 0 2.5rem;
-            margin: 0 2.5rem 0 0;
-        }
+        position: relative;
+        z-index: 1;
     }
 
     .mpp-features-grid {
@@ -57,14 +68,12 @@ const { title, features } = Astro.props
         display: flex;
         flex-flow: row;
         min-width: 100%;
-        padding: 0.7em 0 0;
+        padding: 1em 0;
     }
     .mpp-feature-item {
         background: #fff;
         border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
-        outline: 1px solid rgba(0,0,0,0);
         transition: ease .5s;
         @media (max-width: 992px) {
             min-width: 210px;
@@ -76,7 +85,7 @@ const { title, features } = Astro.props
             flex: 1;
         }
         &:hover {
-            outline: 1px solid #F8714C;
+            box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
         }
         img {
             object-fit: cover;
@@ -90,6 +99,13 @@ const { title, features } = Astro.props
             font-family: "Montserrat";
             font-size: .875rem;
             font-weight: 600;
+
+            & a {
+                font-size: inherit;
+            }
+        }
+        a:hover {
+            color: inherit;
         }
         & p {
             font-size: .625rem;

@@ -11,7 +11,7 @@ const data = await response.json();
                 (item.title !== "Социальные сети" && item.title !== "ABP") &&
                 <li class="mpp-footer-menu-item-lvl-1">
                             {item?.items?.length > 0 && <input id={`dropdown-list-${item.id}`} hidden class="mpp-footer-menu-toggle" type="radio" name="footer-menu-toggle" value="" />}
-                            <a class="mpp-footer-menu-item-lvl-1-link" href={item.path}>{item.title}</a>
+                            <a class="mpp-footer-menu-item-lvl-1-link" href={item.path.replace("/#", "")}>{item.title}</a>
                             {
                                 item?.items?.length > 0 && 
                                 <label class="mpp-footer-menu-toggle-label" for={`dropdown-list-${item.id}`}>
@@ -22,7 +22,7 @@ const data = await response.json();
                             {
                                 item.items.map( (_item: { path: string | URL; title: unknown; }) =>
                                     <li class="mpp-footer-menu-list-item-lvl-2 ">
-                                        <a class="mpp-footer-menu-list-item-lvl-2-link" href={_item.path}>{ _item.title }</a>
+                                        <a class="mpp-footer-menu-list-item-lvl-2-link" href={_item.path.replace("/#", "")}>{ _item.title }</a>
                                     </li>
                                 )
                             }

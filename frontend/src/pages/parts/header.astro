@@ -1,0 +1,88 @@
+---
+import DesktopHeader from "../../components/DesktopHeader/DesktopHeader.astro";
+import Footer from "../../components/Footer.astro";
+import MainMenu from "../../components/MainMenu.astro";
+import MobileHeader from "../../components/MobileHeader/MobileHeader.astro";
+
+const primaryColor = "#f3704e";
+const secondColor = "#f0f0f0";
+const violetColor = "#9747ff";
+const orangeSecondColor = "#f79767";
+const elecPink = "#ff3596";
+const blackColor = "#000";
+const whiteColor = "#fff";
+const lavandaColor = "#e7e2f6";
+const greenColor = "#deefea";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+	</head>
+	<body>
+        <div class="mpp-headers">
+            <DesktopHeader />
+            <MobileHeader />
+            <MainMenu />
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+        <script>
+            const fixedHeaders = () => {
+                let headersBlocks = document.querySelector('.mpp-headers');
+                let menuMobileBottomNavigation = document.querySelector('.mpp-bottom-nav-panel')
+
+                let isMobile = window.innerWidth < 768;
+                
+                document.body.style.paddingTop = `${headersBlocks.clientHeight}px`;
+                document.body.style.paddingBottom = `${isMobile ? menuMobileBottomNavigation.clientHeight : 0}px`
+            }
+            window.addEventListener('load', fixedHeaders);
+            window.addEventListener('resize', fixedHeaders);
+
+            const siteMapBlock = document.querySelector('.mpp-sitemap');
+            const linkSiteMapBlock = document.querySelector('#sitemap');
+            const closeSiteMapBlock = document.querySelector('.mpp-sitemap-close-button');
+            const gridFooter = document.querySelector('.mpp-footer');
+            const gridFooterWrap = document.querySelector('.mpp-footer-wrap');
+
+            const toggleSiteMapBlock = () => {
+                gridFooter.classList.toggle("mpp-footer--show-sitemap");
+                gridFooterWrap.classList.toggle("mpp-footer-wrap--show-sitemap");
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+            
+            closeSiteMapBlock.addEventListener("click", toggleSiteMapBlock);
+            linkSiteMapBlock.addEventListener("click", toggleSiteMapBlock);
+        </script>
+	</body>
+</html>
+
+<style is:global lang="scss"  define:vars={{
+    primaryColor,
+    secondColor,
+    violetColor,
+    orangeSecondColor,
+    elecPink,
+    blackColor,
+    whiteColor,
+    lavandaColor,
+    greenColor
+}}>
+
+    .mpp-headers {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        background-color: #FFFFFF;
+    }
+</style>
