@@ -3,7 +3,7 @@ const {firstColumn, secondColumn} = Astro.props;
 ---
 
 <div class="mpp-seo-text-2-columns">
-    <div class="mpp-seo-text-2-columns-wrap container">
+    <div class="mpp-seo-text-2-columns-wrap">
         <div class="mpp-seo-column" set:html={firstColumn} />
         <div class="mpp-seo-column" set:html={secondColumn} />
     </div>
@@ -13,6 +13,10 @@ const {firstColumn, secondColumn} = Astro.props;
     .mpp-seo-text-2-columns {
         line-height: 1.7;
         overflow: hidden;
+        margin: 1.5rem 0 0;
+        @media (min-width: 768px) {
+            margin: 2rem 0 0;
+        }
     }
 
     .mpp-seo-text-2-columns-wrap {

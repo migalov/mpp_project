@@ -15,7 +15,7 @@ const data = response.data;
     </div>
     <ul class="mpp-sitemmap-wrap container">
         {
-            data.attributes.links.map( item =>
+            data.attributes.itemMenu.map( item =>
                 <li><a href={`/${item.link}`}>{item.label}</a></li>
             )
         }
@@ -74,12 +74,6 @@ const data = response.data;
             border: none;
             cursor: pointer;
         }
-    }
-
-    .mpp-sitemap-close-button {
-        // @media (min-width: 768px) {
-        //     display: none;
-        // }
     }
 
     .mpp-sitemmap-wrap {

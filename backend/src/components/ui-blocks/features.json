@@ -10,15 +10,13 @@
     "title": {
       "type": "string"
     },
-    "body": {
-      "type": "customField",
-      "options": {
-        "output": "HTML",
-        "preset": "rich"
-      },
-      "customField": "plugin::ckeditor.CKEditor"
-    },
     "src": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "link": {
       "type": "string"
     }
   }

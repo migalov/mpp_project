@@ -13,7 +13,7 @@ import Arrow from '../components/icons/slider/Arrow.astro'
                         mainSliderData?.map( (item, index) =>
                             <li class="mpp-main-slide-item splide__slide" data-number={index}>
                                 <a class="mpp-main-slide-item-link-block" href={item.linkButton}>
-                                    <img loading="lazy" src={item.srcDesktop} alt="" />
+                                    <img fetchpriority={ index === 0 ? `high` : `low`} loading="lazy" src={item.srcDesktop} alt="" />
                                     <div class="mpp-main-slide-item__body" set:html={item.body}>
                                         <span class="btn btn-mobile">{item.labelButton}</span>
                                     </div>
@@ -43,7 +43,12 @@ import Arrow from '../components/icons/slider/Arrow.astro'
                         mainSliderData?.map( (item, index) =>
                             <li class="mpp-main-slide-item splide__slide" data-number={index}>
                                 <a class="mpp-main-slide-item-link-block" href={item.linkButton}>
-                                    <img loading="lazy" src={item.srcDesktop} alt="" />
+                                    <img
+                                        fetchpriority={ index === 0 ? `high` : `low`}
+                                        src={index === 0 && item.srcDesktop}
+                                        data-splide-lazy={index > 0 && item.srcDesktop}
+                                        alt=""
+                                        />
                                     <div class="mpp-main-slide-item__body" set:html={item.body}>
                                         <span class="btn btn-mobile">{item.labelButton}</span>
                                     </div>
@@ -56,7 +61,7 @@ import Arrow from '../components/icons/slider/Arrow.astro'
                         sideBannersData?.map( (item, index) =>
                             <li class="mpp-main-slide-item splide__slide" data-number={index}>
                                 <a class="mpp-main-slide-item-link-block" href={item.linkButton}>
-                                    <img src={item.srcDesktop} alt="" />
+                                    <img fetchpriority={`low`} src={item.srcDesktop} alt="" />
                                     <div class="mpp-main-slide-item__body" set:html={item.body}>
                                         <span class="btn btn-mobile">{item.labelButton}</span>
                                     </div>
@@ -70,8 +75,7 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         </section>
         {
             sideBannersData?.map( (item, index) =>
-                <a href={item.linkButton} class="mpp-side-banner" data-index={index+1}>
-                    <img src={item.srcDesktop} alt="" />
+                <a href={item.linkButton} class="mpp-side-banner" data-index={index+1} style={`background-image:url(${item.srcDesktop})`} fetchpriority="high">
                     <div class="mpp-side-banner__body" set:html={item.body} />
                 </a>
             )
@@ -88,7 +92,7 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         type: 'fade',
         rewind: true,
         arrows: true,
-        autoplay: true,
+        autoplay: false,
         interval: 4000,
         pauseOnHover: false,
         lazyLoad: 'nearby',
@@ -112,7 +116,7 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         counter.innerHTML = event + 1;
     });
     }
-  </script>
+</script>
 
 <style scoped lang="scss">
     .mpp-banners {
@@ -125,24 +129,28 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         @media (min-width: 768px) {
             display: grid;
             grid-template-columns: 2fr 1fr;
+            grid-template-rows: repeat(2, 200px);
             grid-template-areas: "m s1" "m s2";
             grid-gap: 1.25rem 1.625rem;
         }
     }
     .mpp-side-banner {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top right;
         position: relative;
         border-radius: 15px;
         overflow: hidden;
+
         &[data-index="1"] {
             grid-area: s1
         }
         &[data-index="2"] {
             grid-area: s2;
         }
-        & img {
-            object-fit: cover;
-            height: 100%;
-        }
+        // & img {
+        //     object-fit: cover;
+        // }
         @media (max-width: 768px) {
             display: none;
         }

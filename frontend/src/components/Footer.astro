@@ -8,7 +8,7 @@ import Docs from '../components/Footer/Docs.astro';
 import SiteMap from './SiteMap.astro';
 ---
 
-<footer class="mpp-footer full-width">
+<footer class="mpp-footer">
     <div class="mpp-footer-wrap container">
         <div class="mpp-footer-logo"><Logo /></div>
         <div class="mpp-footer-rating"><Rating /></div>
@@ -22,14 +22,19 @@ import SiteMap from './SiteMap.astro';
 
 <style is:global lang="scss">
     .mpp-footer {
+        margin: 1.5rem 0 0;
         position: relative;
         padding: 1.5em 0;
         background-color: #F0F0F0;
         @media (min-width: 768px) {
+            margin: 2.5rem 0 0;
             padding: 2.5em 0;
         }
         @media (min-width: 992px) {
             padding: 3.5em 0;
+        }
+        &.mpp-footer--show-sitemap {
+            box-shadow: 0 -10px 10px 0 rgba(0, 0, 0, 0.1);
         }
     }
     .mpp-footer-wrap {
@@ -43,10 +48,7 @@ import SiteMap from './SiteMap.astro';
             "map map"
             "doc doc";
         grid-template-rows: repeat(4, max-content) 0 max-content;
-        // transition: grid-template-rows ease .5s;
-        // .mpp-sitemap-title {
-        //     display: none;
-        // }
+        transition: grid-template-rows ease .5s;
         @media (min-width: 768px) {
             grid-template-areas:
                 "logo abp rating"

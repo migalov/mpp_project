@@ -1,51 +1,94 @@
-<div class="mpp-get-photoproducts-for-mobile">
-    <div class="mpp-get-photoproducts-for-mobile-wrap">
-        <div class="mpp-get-photoproducts-for-mobile-text">
-            <h3>Собирайте&nbsp;фотопродукты<br>в мобильной версии</h3>
+<div class="mpp-get-photoproducts">
+    <div class="mpp-get-photoproducts-wrap">
+        <div class="mpp-get-photoproducts-text">
+            <h3>Теперь собирайте фотокниги в&nbsp;мобильной&nbsp;версии</h3>
             <ul>
-                <li>Экономьте время, получайте классный результат</li>
-                <li>Понятный интерфейс, удобный конструктор</li>
                 <li>Ваши проекты доступны в любой момент</li>
+                <li>Понятный интерфейс, удобный конструктор</li>
+                <li>Экономьте время, получайте классный результат</li>
             </ul>
         </div>
-        <img loading="lazy" height="230" src="https://static.wow2print.com/storage/445/content/image/163137766765fa76dce0a304.50762931.webp" alt="">
+        <!-- <img class="mpp-get-photoproducts__image-desktop" loading="lazy" height="230" src="https://static.wow2print.com/storage/445/content/image/15636928806600f33e9f4122.39992491.png" alt=""> -->
+        <img class="mpp-get-photoproducts__image-mobile" loading="lazy" src="https://static.wow2print.com/storage/445/content/image/15992939596600840ded2496.55324513.webp" />
     </div>
 </div>
 
 <style  lang="scss">
-    .mpp-get-photoproducts-for-mobile {
+    .mpp-get-photoproducts {
         background-color: #f1edfc;
         border-radius: 15px;
         overflow: hidden;
-        @media (max-width: 768px) {
-            display: none;
+        margin: 1.5rem 0 0;
+        @media (min-width: 768px) {
+            margin: 2rem 0 0;
+            background-image:  url(https://static.wow2print.com/storage/445/content/image/15636928806600f33e9f4122.39992491.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: top right;
+        }
+        @media (min-width: 992px) {
+            background-position: 80% 0%;
         }
     }
-    .mpp-get-photoproducts-for-mobile-wrap {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.3rem 1.7rem 0;
-    }
-    .mpp-get-photoproducts-for-mobile-text {
-        & h3 {
-            font-size: 1.75rem;
-            font-weight: 500;
-            line-height: 130%;
-            margin: 0 0 0.3em;
-        }
-        & ul {
-            padding: 0 0 0 1.2em;
-            line-height: 160%;
-        }
-        & li {
-            list-style-type: disc;
-            font-size: .875rem;
-            font-weight: 500;
-            &::marker {
-                font-size: 7px;
-            }
+    .mpp-get-photoproducts-wrap {
+        padding: 1.1rem 1.1rem 0;
+        background-position: 100% 0%;
+        @media (min-width: 768px) {
+            padding: 3em 0 3.6em 3.8em;
+            width: 55%;
         }
         
+        
+    }
+    .mpp-get-photoproducts-text {
+        & h3 {
+            font-size: .875rem;
+            font-weight: 600;
+            margin: 0 0 0.3em;
+            @media (min-width: 768px) {
+                font-size: 1.75rem;
+                font-weight: 500;
+                margin: 0 0 0.5em;
+            }
+        }
+        & ul {
+            padding: 0 0 0 .4em;
+            line-height: 100%;
+            @media (min-width: 768px) {
+                line-height: 130%;
+            }
+        }
+        & li {
+            position: relative;
+            font-size: .8125rem;
+            // font-weight: 500;
+            &::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: -5px;
+                width: 2px;
+                height: 2px;
+                border-radius: 50%;
+                background: var(--blackColor);
+            }
+        }
+    }
+
+    .mpp-get-photoproducts__image-desktop {
+        @media (max-width: 768px) {
+            display: none;
+
+        }
+    }
+    .mpp-get-photoproducts__image-mobile {
+        position: relative;
+        top: 4px;
+        margin: .2em 0 0;
+        @media (min-width: 768px) {
+            display: none;
+
+        }
     }
 </style>

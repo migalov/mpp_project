@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../BaseLayout.astro";
+import Features from "../../components/Features.astro";
+
+const response = await fetch(`http://localhost:1337/api/main-page?populate%5BContent%5D%5Bpopulate%5D=%2A`).then(res => res.json());
+const data = response.data;
+
+---
+
+		{
+			data.attributes.Content.map( block =>
+				<>
+					{
+						block?.Features && <Features features={block?.Features} title={block.title}/>
+
+					}
+				</>
+				
+			)
+		}

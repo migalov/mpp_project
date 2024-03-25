@@ -1047,115 +1047,6 @@ export interface PluginNavigationNavigationsItemsRelated
   };
 }
 
-export interface ApiAdvertisingBannerAdvertisingBanner
-  extends Schema.CollectionType {
-  collectionName: 'advertising_banners';
-  info: {
-    singularName: 'advertising-banner';
-    pluralName: 'advertising-banners';
-    displayName: 'Advertising Banner';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    body: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'rich';
-        }
-      >;
-    background: Attribute.String &
-      Attribute.CustomField<'plugin::color-picker.color'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::advertising-banner.advertising-banner',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::advertising-banner.advertising-banner',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBannerMenuBannerMenu extends Schema.CollectionType {
-  collectionName: 'banner_menus';
-  info: {
-    singularName: 'banner-menu';
-    pluralName: 'banner-menus';
-    displayName: 'Banner Menu';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    body: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'standard';
-        }
-      >;
-    preview: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::banner-menu.banner-menu',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::banner-menu.banner-menu',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFeatureFeature extends Schema.CollectionType {
-  collectionName: 'features';
-  info: {
-    singularName: 'feature';
-    pluralName: 'features';
-    displayName: 'Feature';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Content: Attribute.DynamicZone<['ui-blocks.features']>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::feature.feature',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::feature.feature',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiGlobalNavigationGlobalNavigation extends Schema.SingleType {
   collectionName: 'global_navigations';
   info: {
@@ -1179,6 +1070,37 @@ export interface ApiGlobalNavigationGlobalNavigation extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::global-navigation.global-navigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiItemMenuItemMenu extends Schema.CollectionType {
+  collectionName: 'item_menus';
+  info: {
+    singularName: 'item-menu';
+    pluralName: 'item-menus';
+    displayName: 'Item Menu';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    itemMenu: Attribute.Component<'menu.item-menu'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::item-menu.item-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::item-menu.item-menu',
       'oneToOne',
       'admin::user'
     > &
@@ -1231,55 +1153,25 @@ export interface ApiSectionMenuSectionMenu extends Schema.CollectionType {
     singularName: 'section-menu';
     pluralName: 'section-menus';
     displayName: 'Section Menu';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    heading: Attribute.String;
-    links: Attribute.Component<'menu.item-menu', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::section-menu.section-menu',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::section-menu.section-menu',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiStoryStory extends Schema.CollectionType {
-  collectionName: 'stories';
-  info: {
-    singularName: 'story';
-    pluralName: 'stories';
-    displayName: 'Story';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Content: Attribute.DynamicZone<['ui-blocks.story']>;
+    heading: Attribute.String;
+    itemMenu: Attribute.Component<'menu.item-menu', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::story.story',
+      'api::section-menu.section-menu',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::story.story',
+      'api::section-menu.section-menu',
       'oneToOne',
       'admin::user'
     > &
@@ -1310,13 +1202,10 @@ declare module '@strapi/types' {
       'plugin::navigation.navigation': PluginNavigationNavigation;
       'plugin::navigation.navigation-item': PluginNavigationNavigationItem;
       'plugin::navigation.navigations-items-related': PluginNavigationNavigationsItemsRelated;
-      'api::advertising-banner.advertising-banner': ApiAdvertisingBannerAdvertisingBanner;
-      'api::banner-menu.banner-menu': ApiBannerMenuBannerMenu;
-      'api::feature.feature': ApiFeatureFeature;
       'api::global-navigation.global-navigation': ApiGlobalNavigationGlobalNavigation;
+      'api::item-menu.item-menu': ApiItemMenuItemMenu;
       'api::main-page.main-page': ApiMainPageMainPage;
       'api::section-menu.section-menu': ApiSectionMenuSectionMenu;
-      'api::story.story': ApiStoryStory;
     }
   }
 }

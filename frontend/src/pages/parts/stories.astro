@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../BaseLayout.astro";
+import Stories from "../../components/Stories.astro";
+
+const response = await fetch(`http://localhost:1337/api/main-page?populate%5BContent%5D%5Bpopulate%5D=%2A`).then(res => res.json());
+const data = response.data;
+
+---
+
+		{
+			data.attributes.Content.map( block =>
+				<>
+					{
+						block?.Stories && <Stories stories={block?.Stories} title={block.title}/>
+					}
+					
+				</>
+				
+			)
+		}

@@ -9,7 +9,7 @@ const data = await response.json();
             data.map((item: { path: string | URL; title: unknown; items: any[]; index: any; }) => 
                 (item.title !== "ABP") &&
                 <li>
-                    <a href={item.path}>{item.title}</a>
+                    <a href={item.externalPath?.replace('/#', '')}>{item.title}</a>
                 </li> 
             )
         }

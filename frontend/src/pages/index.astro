@@ -1,19 +1,13 @@
 ---
-import MobileHeader from "../components/MobileHeader/MobileHeader.astro";
-import MainMenu from "../components/MainMenu.astro";
-import DesktopHeader from "../components/DesktopHeader/DesktopHeader.astro";
 import MobilePanel from "../components/MobilePanel.astro";
-import Footer from "../components/Footer.astro";
 import BaseLayout from "../BaseLayout.astro";
-import Feature from "../components/Feature.astro";
+import Features from "../components/Features.astro";
 import SEOBlockModelOne from "../components/SEOBlockModelOne.astro";
-import Story from "../components/Story.astro";
+import Stories from "../components/Stories.astro";
 import TwoColumnsSEOText from "../components/TwoColumnsSEOText.astro";
 import GridBanners from "../components/GridBanners.astro";
 import YandexWidgets from "../components/YandexWidgets.astro";
 import GetPhotoProducts from "../components/GetPhotoProducts.astro";
-import GiftSertificate from "../components/GiftSertificate.astro";
-import SiteMap from "../components/SiteMap.astro";
 
 const response = await fetch(`http://localhost:1337/api/main-page?populate%5BContent%5D%5Bpopulate%5D=%2A`).then(res => res.json());
 const data = response.data;
@@ -21,11 +15,6 @@ const data = response.data;
 ---
 
 <BaseLayout>
-	<div class="mpp-headers">
-		<DesktopHeader />
-		<MobileHeader />
-		<MainMenu />
-	</div>
 		{
 			data.attributes.Content.map( block =>
 				<>
@@ -37,110 +26,25 @@ const data = response.data;
 							/>
 					}
 					{
-						block.Stories &&
-							<section class="mpp-stories">
-									<h2>{block.title}</h2>
-								<div class="mpp-stories-wrap">
-									<ul class="mpp-stories-grid">
-										{block.Stories?.map( item => <Story {...item} />)}
-									</ul>
-								</div>
-							</section>
+						block?.Stories && <Stories stories={block?.Stories} title={block.title}/>
 					}
 					{
-						block.Features &&
-							<section class="mpp-features full-width">
-								<div class="container">
-									<h2>{block.title}</h2>
-								</div>
-								<div class="mpp-features-wrap container">
-									<ul class="mpp-features-grid">
-										{block.Features?.map( item => <Feature {...item} />)}
-									</ul>
-								</div>
-							</section>
+						block?.Features && <Features features={block?.Features} title={block.title}/>
+
 					}
 					{
 						block.__component === "ui-blocks.seo-block-model-1" &&
 						<SEOBlockModelOne {...block} />
 					}
 					{
-						// block.__component === "ui-blocks.seo-block-model-2" &&
-						// <TwoColumnsSEOText {...block} />
+						block.__component === "ui-blocks.seo-block-model-2" &&
+						<TwoColumnsSEOText {...block} />
 					}
 				</>
 				
 			)
 		}
-		<!-- <YandexWidgets />
+		<YandexWidgets />
 		<GetPhotoProducts />
-		<GiftSertificate /> -->
 	<MobilePanel />
-	<Footer /> 
 </BaseLayout>
-
-<style lang="scss" >
-
-.mpp-headers {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 2;
-	background-color: #FFFFFF;
-}
-/* Stories */
-.mpp-stories {
-        padding: 2em 0;
-        & h2 {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin: 0 0 .5em;
-        }
-    }
-
-    .mpp-stories-wrap {
-        @media (max-width: 768px) {
-            overflow-x: auto;
-        }
-    }
-
-    .mpp-stories-grid {
-        gap: 2rem;
-        display: flex;
-        flex-flow: row;
-        min-width: 100%;
-        padding: 0.7em 0 0;
-
-        @media (min-width: 768px) {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    /* Features */
-    .mpp-features {
-    padding: 2em 0;
-    background-color: #F8714C;
-    h2 {
-        font-size: 1.25rem;
-        font-weight: 500;
-        color: #fff;
-        margin: 0 0 .5em;
-    }
-
-}
-
-    .mpp-features-wrap {
-        overflow-x: auto;
-    }
-
-    .mpp-features-grid {
-        display: flex;
-        gap: 2em;
-        display: flex;
-        flex-flow: row;
-        min-width: 100%;
-        padding: 0.7em 0 0;
-    }
-</style>

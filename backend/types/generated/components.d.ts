@@ -96,15 +96,9 @@ export interface UiBlocksFeatures extends Schema.Component {
   };
   attributes: {
     title: Attribute.String;
-    body: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'rich';
-        }
-      >;
     src: Attribute.String;
+    description: Attribute.Text;
+    link: Attribute.String;
   };
 }
 
