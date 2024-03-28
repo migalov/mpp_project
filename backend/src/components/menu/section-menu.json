@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_menu_section_menus",
+  "info": {
+    "displayName": "Section Menu",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.item-menu"
+    },
+    "heading": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "previews": {
+      "type": "component",
+      "repeatable": true,
+      "component": "menu.previews"
+    }
+  }
+}

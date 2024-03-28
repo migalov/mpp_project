@@ -1,12 +1,15 @@
 {
-  "collectionName": "components_menu_item_menus",
+  "collectionName": "components_ui_components_social_networks",
   "info": {
-    "displayName": "Item Menu",
-    "icon": "link",
+    "displayName": "Social Networks",
+    "icon": "earth",
     "description": ""
   },
   "options": {},
   "attributes": {
+    "svg": {
+      "type": "text"
+    },
     "label": {
       "type": "string"
     },

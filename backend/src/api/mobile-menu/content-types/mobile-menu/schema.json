@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "mobile_menus",
+  "info": {
+    "singularName": "mobile-menu",
+    "pluralName": "mobile-menus",
+    "displayName": "Mobile Menu",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Content": {
+      "type": "dynamiczone",
+      "components": [
+        "menu.item-menu",
+        "menu.section-menu"
+      ]
+    }
+  }
+}

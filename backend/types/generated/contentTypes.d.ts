@@ -1047,6 +1047,71 @@ export interface PluginNavigationNavigationsItemsRelated
   };
 }
 
+export interface ApiDesktopMenuDesktopMenu extends Schema.SingleType {
+  collectionName: 'desktop_menus';
+  info: {
+    singularName: 'desktop-menu';
+    pluralName: 'desktop-menus';
+    displayName: 'Desktop Menu';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    LeftSide: Attribute.DynamicZone<['menu.section-menu']>;
+    RightSide: Attribute.DynamicZone<['menu.section-menu']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::desktop-menu.desktop-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::desktop-menu.desktop-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFooterMenuFooterMenu extends Schema.SingleType {
+  collectionName: 'footer_menus';
+  info: {
+    singularName: 'footer-menu';
+    pluralName: 'footer-menus';
+    displayName: 'Footer Menu';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ABP: Attribute.DynamicZone<['menu.section-menu']>;
+    Menus: Attribute.DynamicZone<['menu.section-menu']>;
+    Docs: Attribute.DynamicZone<['menu.section-menu']>;
+    SocialNetwork: Attribute.DynamicZone<['ui-components.social-networks']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::footer-menu.footer-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::footer-menu.footer-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiGlobalNavigationGlobalNavigation extends Schema.SingleType {
   collectionName: 'global_navigations';
   info: {
@@ -1108,6 +1173,68 @@ export interface ApiItemMenuItemMenu extends Schema.CollectionType {
   };
 }
 
+export interface ApiLandingModel1LandingModel1 extends Schema.CollectionType {
+  collectionName: 'landing_model_1s';
+  info: {
+    singularName: 'landing-model-1';
+    pluralName: 'landing-model-1s';
+    displayName: 'Landing Model 1';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    src: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::landing-model-1.landing-model-1',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::landing-model-1.landing-model-1',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMainMenuMainMenu extends Schema.SingleType {
+  collectionName: 'main_menus';
+  info: {
+    singularName: 'main-menu';
+    pluralName: 'main-menus';
+    displayName: 'Main Menu';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Content: Attribute.DynamicZone<['menu.section-menu', 'menu.item-menu']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::main-menu.main-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::main-menu.main-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiMainPageMainPage extends Schema.SingleType {
   collectionName: 'main_pages';
   info: {
@@ -1140,6 +1267,37 @@ export interface ApiMainPageMainPage extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::main-page.main-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMobileMenuMobileMenu extends Schema.SingleType {
+  collectionName: 'mobile_menus';
+  info: {
+    singularName: 'mobile-menu';
+    pluralName: 'mobile-menus';
+    displayName: 'Mobile Menu';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Content: Attribute.DynamicZone<['menu.item-menu', 'menu.section-menu']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::mobile-menu.mobile-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::mobile-menu.mobile-menu',
       'oneToOne',
       'admin::user'
     > &
@@ -1202,9 +1360,14 @@ declare module '@strapi/types' {
       'plugin::navigation.navigation': PluginNavigationNavigation;
       'plugin::navigation.navigation-item': PluginNavigationNavigationItem;
       'plugin::navigation.navigations-items-related': PluginNavigationNavigationsItemsRelated;
+      'api::desktop-menu.desktop-menu': ApiDesktopMenuDesktopMenu;
+      'api::footer-menu.footer-menu': ApiFooterMenuFooterMenu;
       'api::global-navigation.global-navigation': ApiGlobalNavigationGlobalNavigation;
       'api::item-menu.item-menu': ApiItemMenuItemMenu;
+      'api::landing-model-1.landing-model-1': ApiLandingModel1LandingModel1;
+      'api::main-menu.main-menu': ApiMainMenuMainMenu;
       'api::main-page.main-page': ApiMainPageMainPage;
+      'api::mobile-menu.mobile-menu': ApiMobileMenuMobileMenu;
       'api::section-menu.section-menu': ApiSectionMenuSectionMenu;
     }
   }

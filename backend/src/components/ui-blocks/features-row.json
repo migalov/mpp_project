@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_ui_blocks_features_rows",
+  "info": {
+    "displayName": "Features Row",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "feature": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ui-components.feature"
+    }
+  }
+}

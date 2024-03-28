@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "landing_model_1s",
+  "info": {
+    "singularName": "landing-model-1",
+    "pluralName": "landing-model-1s",
+    "displayName": "Landing Model 1"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "src": {
+      "type": "string"
+    }
+  }
+}

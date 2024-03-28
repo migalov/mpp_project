@@ -48,18 +48,42 @@ export interface MenuItemMenu extends Schema.Component {
   };
   attributes: {
     label: Attribute.String;
-    link: Attribute.String;
+    url: Attribute.String;
   };
 }
 
-export interface MenuListItemsMenu extends Schema.Component {
-  collectionName: 'components_menu_list_items_menus';
+export interface MenuPreviews extends Schema.Component {
+  collectionName: 'components_menu_previews';
   info: {
-    displayName: 'List Items Menu';
-    icon: 'bulletList';
+    displayName: 'Previews';
+    icon: 'picture';
   };
   attributes: {
-    itemMenu: Attribute.Component<'menu.item-menu', true>;
+    title: Attribute.String;
+    body: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    src: Attribute.String;
+  };
+}
+
+export interface MenuSectionMenu extends Schema.Component {
+  collectionName: 'components_menu_section_menus';
+  info: {
+    displayName: 'Section Menu';
+    icon: 'bulletList';
+    description: '';
+  };
+  attributes: {
+    links: Attribute.Component<'menu.item-menu', true>;
+    heading: Attribute.String;
+    url: Attribute.String;
+    previews: Attribute.Component<'menu.previews', true>;
   };
 }
 
@@ -87,6 +111,29 @@ export interface UiBlocksBanner extends Schema.Component {
   };
 }
 
+export interface UiBlocksFaqItems extends Schema.Component {
+  collectionName: 'components_ui_blocks_faq_items';
+  info: {
+    displayName: 'FAQ Items';
+    icon: 'question';
+  };
+  attributes: {
+    faqItem: Attribute.Component<'ui-components.faq-item', true>;
+    heading: Attribute.String;
+  };
+}
+
+export interface UiBlocksFeaturesRow extends Schema.Component {
+  collectionName: 'components_ui_blocks_features_rows';
+  info: {
+    displayName: 'Features Row';
+    icon: 'apps';
+  };
+  attributes: {
+    feature: Attribute.Component<'ui-components.feature', true>;
+  };
+}
+
 export interface UiBlocksFeatures extends Schema.Component {
   collectionName: 'components_ui_blocks_features';
   info: {
@@ -99,6 +146,17 @@ export interface UiBlocksFeatures extends Schema.Component {
     src: Attribute.String;
     description: Attribute.Text;
     link: Attribute.String;
+  };
+}
+
+export interface UiBlocksReviewsRow extends Schema.Component {
+  collectionName: 'components_ui_blocks_reviews_rows';
+  info: {
+    displayName: 'Reviews Row';
+    icon: 'apps';
+  };
+  attributes: {
+    reivew: Attribute.Component<'ui-components.review', true>;
   };
 }
 
@@ -180,6 +238,127 @@ export interface UiComponentsButton extends Schema.Component {
   };
 }
 
+export interface UiComponentsFaqItem extends Schema.Component {
+  collectionName: 'components_ui_components_faq_items';
+  info: {
+    displayName: 'FAQ Item';
+  };
+  attributes: {
+    title: Attribute.String;
+    body: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface UiComponentsFeature extends Schema.Component {
+  collectionName: 'components_ui_components_features';
+  info: {
+    displayName: 'Feature';
+    icon: 'plus';
+  };
+  attributes: {
+    title: Attribute.String;
+    body: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    src: Attribute.String;
+  };
+}
+
+export interface UiComponentsGridHowBlock extends Schema.Component {
+  collectionName: 'components_ui_components_grid_how_blocks';
+  info: {
+    displayName: 'GridHowBlock';
+    icon: 'check';
+  };
+  attributes: {
+    title: Attribute.String;
+    body: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    bgColor: Attribute.String &
+      Attribute.CustomField<'plugin::color-picker.color'>;
+  };
+}
+
+export interface UiComponentsOfferToPurchase extends Schema.Component {
+  collectionName: 'components_ui_components_offer_to_purchases';
+  info: {
+    displayName: 'Offer to purchase';
+    icon: 'restaurant';
+  };
+  attributes: {
+    title: Attribute.String;
+    price: Attribute.Integer;
+  };
+}
+
+export interface UiComponentsReview extends Schema.Component {
+  collectionName: 'components_ui_components_reviews';
+  info: {
+    displayName: 'Review';
+  };
+  attributes: {
+    author: Attribute.String;
+    src: Attribute.String;
+    body: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface UiComponentsSeoBlockModel3 extends Schema.Component {
+  collectionName: 'components_ui_components_seo_block_model_3_s';
+  info: {
+    displayName: 'SEO Block (Model 3)';
+  };
+  attributes: {
+    body: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+  };
+}
+
+export interface UiComponentsSocialNetworks extends Schema.Component {
+  collectionName: 'components_ui_components_social_networks';
+  info: {
+    displayName: 'Social Networks';
+    icon: 'earth';
+    description: '';
+  };
+  attributes: {
+    svg: Attribute.Text;
+    label: Attribute.String;
+    url: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -187,13 +366,24 @@ declare module '@strapi/types' {
       'list-components.list-features': ListComponentsListFeatures;
       'list-components.list-stories': ListComponentsListStories;
       'menu.item-menu': MenuItemMenu;
-      'menu.list-items-menu': MenuListItemsMenu;
+      'menu.previews': MenuPreviews;
+      'menu.section-menu': MenuSectionMenu;
       'ui-blocks.banner': UiBlocksBanner;
+      'ui-blocks.faq-items': UiBlocksFaqItems;
+      'ui-blocks.features-row': UiBlocksFeaturesRow;
       'ui-blocks.features': UiBlocksFeatures;
+      'ui-blocks.reviews-row': UiBlocksReviewsRow;
       'ui-blocks.seo-block-model-1': UiBlocksSeoBlockModel1;
       'ui-blocks.seo-block-model-2': UiBlocksSeoBlockModel2;
       'ui-blocks.story': UiBlocksStory;
       'ui-components.button': UiComponentsButton;
+      'ui-components.faq-item': UiComponentsFaqItem;
+      'ui-components.feature': UiComponentsFeature;
+      'ui-components.grid-how-block': UiComponentsGridHowBlock;
+      'ui-components.offer-to-purchase': UiComponentsOfferToPurchase;
+      'ui-components.review': UiComponentsReview;
+      'ui-components.seo-block-model-3': UiComponentsSeoBlockModel3;
+      'ui-components.social-networks': UiComponentsSocialNetworks;
     }
   }
 }

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_ui_blocks_reviews_rows",
+  "info": {
+    "displayName": "Reviews Row",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "reivew": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ui-components.review"
+    }
+  }
+}

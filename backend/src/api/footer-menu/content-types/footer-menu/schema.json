@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "footer_menus",
+  "info": {
+    "singularName": "footer-menu",
+    "pluralName": "footer-menus",
+    "displayName": "Footer Menu",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ABP": {
+      "type": "dynamiczone",
+      "components": [
+        "menu.section-menu"
+      ]
+    },
+    "Menus": {
+      "type": "dynamiczone",
+      "components": [
+        "menu.section-menu"
+      ]
+    },
+    "Docs": {
+      "type": "dynamiczone",
+      "components": [
+        "menu.section-menu"
+      ]
+    },
+    "SocialNetwork": {
+      "type": "dynamiczone",
+      "components": [
+        "ui-components.social-networks"
+      ]
+    }
+  }
+}

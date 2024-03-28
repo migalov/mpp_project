@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_ui_components_offer_to_purchases",
+  "info": {
+    "displayName": "Offer to purchase",
+    "icon": "restaurant"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+---
+import Features from "../../components/Features.astro";
+import SEOBlockModelOne from "../../components/SEOBlockModelOne.astro";
+import Stories from "../../components/Stories.astro";
+import TwoColumnsSEOText from "../../components/TwoColumnsSEOText.astro";
+import GridBanners from "../../components/GridBanners.astro";
+import YandexWidgets from "../../components/YandexWidgets.astro";
+import GetPhotoProducts from "../../components/GetPhotoProducts.astro";
+
+const response = await fetch(`http://localhost:1337/api/main-page?populate%5BContent%5D%5Bpopulate%5D=%2A`).then(res => res.json());
+const data = response.data;
+
+---
+		{
+			data.attributes.Content.map( block =>
+				<>
+					{
+						(block?.MainSlider || block?.SideBanner) &&
+							<GridBanners
+								mainSliderData={block?.MainSlider}
+								sideBannersData={block?.SideBanner}
+							/>
+					}
+					{
+						block?.Stories && <Stories stories={block?.Stories} title={block.title}/>
+					}
+					{
+						block?.Features && <Features features={block?.Features} title={block.title}/>
+
+					}
+					{
+						block.__component === "ui-blocks.seo-block-model-1" &&
+						<SEOBlockModelOne {...block} />
+					}
+					{
+						block.__component === "ui-blocks.seo-block-model-2" &&
+						<TwoColumnsSEOText {...block} />
+					}
+				</>
+				
+			)
+		}
+		<YandexWidgets />
+		<GetPhotoProducts />

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_ui_blocks_faq_items",
+  "info": {
+    "displayName": "FAQ Items",
+    "icon": "question"
+  },
+  "options": {},
+  "attributes": {
+    "faqItem": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ui-components.faq-item"
+    },
+    "heading": {
+      "type": "string"
+    }
+  }
+}
