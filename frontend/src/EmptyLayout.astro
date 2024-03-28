@@ -1,0 +1,122 @@
+---
+const primaryColor = "#f3704e";
+const secondColor = "#f0f0f0";
+const violetColor = "#9747ff";
+const orangeSecondColor = "#f79767";
+const elecPink = "#ff3596";
+const blackColor = "#000";
+const whiteColor = "#fff";
+const lavandaColor = "#e7e2f6";
+const greenColor = "#deefea";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+	</head>
+	<body>
+        <div class="container content-html-source">
+            <slot />
+        </div>
+	</body>
+</html>
+
+<style is:global lang="scss"  define:vars={{
+    primaryColor,
+    secondColor,
+    violetColor,
+    orangeSecondColor,
+    elecPink,
+    blackColor,
+    whiteColor,
+    lavandaColor,
+    greenColor
+}}>
+
+    .full-width {
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+    }
+    *, *::after, *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html {
+        overflow-x: hidden;
+    }
+    body {
+        margin: 0;
+        color: #000;
+        font-family: "Montserrat", sans-serif;
+    }
+    ol, ul, dl {
+        margin: 0;
+    }
+    li {
+        list-style-type: none;
+    }
+    a {
+        color: #000;
+        text-decoration: none;
+        font-family: "Montserrat", sans-serif;
+        transition: color ease .5s;
+    }
+    a:hover {
+        color: var(--primaryColor);
+        text-decoration: none!important;
+    }
+    img {
+        max-width: 100%;
+    }
+    .container {
+        margin: 0 auto;
+        
+        padding: 0 2rem;
+           max-width: 1270px;
+    }
+    .alert.alert-danger {
+        display: none;
+    }
+    svg path, svg circle {
+        transition: ease .5s;
+    }
+    .btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn-default {
+        background-color: #FFFFFF;
+        color: var(--primaryColor);
+        border: 1px solid var(--primaryColor);
+        &:hover {
+            background-color: var(--primaryColor);
+            color: #FFFFFF;
+        }
+    }
+    .btn-mobile {
+        font-size: .875rem;
+        background-color: var(--primaryColor);
+        color: #FFFFFF;
+        height: 3em;
+        min-width: 252px;
+        border-radius: 1.5em;
+    }
+    .mpp-headers {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        background-color: #FFFFFF;
+    }
+</style>

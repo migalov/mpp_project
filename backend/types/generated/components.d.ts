@@ -128,9 +128,11 @@ export interface UiBlocksFeaturesRow extends Schema.Component {
   info: {
     displayName: 'Features Row';
     icon: 'apps';
+    description: '';
   };
   attributes: {
     feature: Attribute.Component<'ui-components.feature', true>;
+    title: Attribute.String;
   };
 }
 
@@ -146,6 +148,19 @@ export interface UiBlocksFeatures extends Schema.Component {
     src: Attribute.String;
     description: Attribute.Text;
     link: Attribute.String;
+  };
+}
+
+export interface UiBlocksGridHowBlock extends Schema.Component {
+  collectionName: 'components_ui_blocks_grid_how_blocks';
+  info: {
+    displayName: 'GridHowBlock';
+    icon: 'apps';
+    description: '';
+  };
+  attributes: {
+    Content: Attribute.Component<'ui-components.grid-how-block', true>;
+    title: Attribute.String;
   };
 }
 
@@ -279,8 +294,9 @@ export interface UiComponentsFeature extends Schema.Component {
 export interface UiComponentsGridHowBlock extends Schema.Component {
   collectionName: 'components_ui_components_grid_how_blocks';
   info: {
-    displayName: 'GridHowBlock';
+    displayName: 'GridHowItem';
     icon: 'check';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
@@ -294,6 +310,7 @@ export interface UiComponentsGridHowBlock extends Schema.Component {
       >;
     bgColor: Attribute.String &
       Attribute.CustomField<'plugin::color-picker.color'>;
+    opacity: Attribute.Decimal;
   };
 }
 
@@ -317,23 +334,6 @@ export interface UiComponentsReview extends Schema.Component {
   attributes: {
     author: Attribute.String;
     src: Attribute.String;
-    body: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'rich';
-        }
-      >;
-  };
-}
-
-export interface UiComponentsSeoBlockModel3 extends Schema.Component {
-  collectionName: 'components_ui_components_seo_block_model_3_s';
-  info: {
-    displayName: 'SEO Block (Model 3)';
-  };
-  attributes: {
     body: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -372,6 +372,7 @@ declare module '@strapi/types' {
       'ui-blocks.faq-items': UiBlocksFaqItems;
       'ui-blocks.features-row': UiBlocksFeaturesRow;
       'ui-blocks.features': UiBlocksFeatures;
+      'ui-blocks.grid-how-block': UiBlocksGridHowBlock;
       'ui-blocks.reviews-row': UiBlocksReviewsRow;
       'ui-blocks.seo-block-model-1': UiBlocksSeoBlockModel1;
       'ui-blocks.seo-block-model-2': UiBlocksSeoBlockModel2;
@@ -382,7 +383,6 @@ declare module '@strapi/types' {
       'ui-components.grid-how-block': UiComponentsGridHowBlock;
       'ui-components.offer-to-purchase': UiComponentsOfferToPurchase;
       'ui-components.review': UiComponentsReview;
-      'ui-components.seo-block-model-3': UiComponentsSeoBlockModel3;
       'ui-components.social-networks': UiComponentsSocialNetworks;
     }
   }

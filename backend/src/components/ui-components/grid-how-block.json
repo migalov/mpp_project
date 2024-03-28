@@ -1,8 +1,9 @@
 {
   "collectionName": "components_ui_components_grid_how_blocks",
   "info": {
-    "displayName": "GridHowBlock",
-    "icon": "check"
+    "displayName": "GridHowItem",
+    "icon": "check",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -21,6 +22,9 @@
       "type": "customField",
       "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
       "customField": "plugin::color-picker.color"
+    },
+    "opacity": {
+      "type": "decimal"
     }
   }
 }

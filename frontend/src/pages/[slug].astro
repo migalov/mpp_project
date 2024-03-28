@@ -1,0 +1,45 @@
+---
+// import BaseLayout from "../BaseLayout.astro"
+import EmptyLayout from "../EmptyLayout.astro";
+import BannerV2 from "../components/BannerV2.astro";
+import Features from "../components/Features.astro";
+import GridHow from "../components/GridHow.astro";
+
+export function getStaticPaths() {
+  return [
+    {params: {slug: 'testpage'}},
+    {params: {slug: 'vipusknie-albomi-optom'}}
+  ];
+}
+
+const {slug} =  Astro.params;
+const response = await fetch(`http://localhost:1337/api/landing-model-1s?filters[slug]=${slug}&populate[Content][populate]=*`).then(x  => x.json());
+const page = response.data;
+---
+
+<EmptyLayout>
+  {
+    page[0].attributes.Content.map( block => 
+      <>
+        {
+						block.__component === "ui-blocks.banner" &&
+						<BannerV2 {...block} />
+				}
+        {
+						block?.__component === "ui-blocks.grid-how-block" &&
+						<GridHow title={block.title} content={block.Content} />
+				}
+        {
+            block?.feature && <Features features={block?.feature} title={block.title}/>
+        }
+
+      </>
+    )
+  }
+</EmptyLayout>
+
+<style is:global>
+  p {
+    font-size: .875rem;
+  }
+</style>

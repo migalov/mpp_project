@@ -15,7 +15,7 @@ import Arrow from '../components/icons/slider/Arrow.astro'
                                 <a class="mpp-main-slide-item-link-block" href={item.linkButton}>
                                     <img fetchpriority={ index === 0 ? `high` : `low`} loading="lazy" src={item.srcDesktop} alt="" />
                                     <div class="mpp-main-slide-item__body" set:html={item.body}>
-                                        <span class="btn btn-mobile">{item.labelButton}</span>
+                                        <span class="btn">{item.labelButton}</span>
                                     </div>
                                     
                                 </a>
@@ -147,6 +147,9 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         }
         &[data-index="2"] {
             grid-area: s2;
+            & .mpp-side-banner__body {
+                width: 45%;
+            }
         }
         // & img {
         //     object-fit: cover;
@@ -190,9 +193,18 @@ import Arrow from '../components/icons/slider/Arrow.astro'
             width: 100%;
             height: 100%;
             opacity: .4;
+            mix-blend-mode: multiply;
             @media (min-width: 768px) {
-                background: linear-gradient(180deg, #fff 0%, #fff 70%, #000000 100%);
+                background: linear-gradient(180deg, #fff 0%, #fff 60%, #000000 100%);
                 mix-blend-mode: multiply;
+            }
+            
+        }
+        @media (max-width: 768px) {
+            &:not(:nth-last-child(1), :nth-last-child(2)) {
+                &::before {
+                    background: linear-gradient(360deg, #fff 0%, #fff 50%, #000000 100%);
+                }
             }
         }
 
@@ -225,15 +237,21 @@ import Arrow from '../components/icons/slider/Arrow.astro'
         height: 100%;
         justify-content: space-between;
         @media (min-width: 768px) {
-            justify-content: flex-end;
-            align-items: flex-start;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            & .btn {
+                width: 120px;
+                background-color: #f3704e;
+                border-radius: 15px;
+                color: #FFF;
+                padding: 1em 0;
+                font-size: .875rem;
+            }
         }
         & .btn {
-            order: 2;
-            @media (min-width: 768px) {
-                display: none;
-            }
-            
+            order: 2;         
         }
     }
     .mpp-navigation-arrows {
@@ -267,9 +285,14 @@ import Arrow from '../components/icons/slider/Arrow.astro'
     .mpp-main-slide-item-link-block {
         display: block;
         height: 100%;
+
+        & img {
+            height: 100%;
+            object-position: 50% 40%;
+        }
     }
 </style>
-<style  lang="scss">
+<style lang="scss">
     .mpp-main-slider .splide__pagination {
         @media (min-width: 768px) {
             display: none;
@@ -281,5 +304,21 @@ import Arrow from '../components/icons/slider/Arrow.astro'
     }
     .mpp-main-slider .splide__list {
         height: 100%;
+    }
+</style>
+<style is:global lang="scss">
+    .mpp-main-slide-item__body p {
+        line-height: 1.5;
+    }
+
+    .mpp-main-slide-item__body p:first-child:has(+ p) {
+        @media (min-width: 768px) {
+            font-size: 1.375rem;
+        }
+    }
+    .mpp-main-slide-item__body p:nth-of-type(2) {
+        @media (max-width: 768px) {
+            font-size: .875rem;
+        }
     }
 </style>

@@ -1,8 +1,6 @@
-
 ---
-const { title, features } = Astro.props
+const { title, features } = Astro.props;
 ---
-
 <section class="mpp-features">
     <h2>{title}</h2>
     <div class="mpp-features-wrap">
@@ -14,7 +12,8 @@ const { title, features } = Astro.props
                         <div class="mpp-feature-body">
                             {!item.link && <h3>{item.title}</h3>}
                             {item.link && <h3><a href={item.link}>{item.title}</a></h3>}
-                            <p>{item.description}</p>
+                            {item.description && <p>{item.description}</p>}
+                            {item.body && <div class="mpp-feature-body-html" set:html={item.body} />}
                         </div>
                     </li>
                 )
@@ -112,5 +111,19 @@ const { title, features } = Astro.props
             line-height: 1.4;
             margin: 0.6em 0 0 0;
         }
+    }
+    
+</style>
+
+<style is:global lang="scss">
+    .mpp-feature-body-html p, .mpp-feature-body-html li {
+        font-size: .625rem;
+        line-height: 1.4;
+        margin: 0.6em 0 0 0;
+    }
+    .mpp-feature-body-html li {
+        list-style-type: inherit;
+        list-style-position: outside;
+        margin: 0.6em 0 0 1em;
     }
 </style>

@@ -31,9 +31,19 @@ const { title, stories } = Astro.props;
             margin: 0 0 .5em;
             position: relative;
         }
+        
+        li {
+            transition: ease .5s;
+            aspect-ratio: 1/1;
+            
+            @media (max-width: 768px) {
+                min-width: 265px;
+            }
+            
+        }
         a {
             display: block;
-            height: 240px;
+            height: 100%;
             border-radius: 15px;
             background-size: cover;
             background-position: top center;
@@ -44,19 +54,7 @@ const { title, stories } = Astro.props;
             &:hover {
                 box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
             }
-            @media (min-width: 768px) {
-                height: 300px;
-            }
         }
-        li {
-            transition: ease .5s;
-            
-            @media (max-width: 768px) {
-                min-width: 265px;
-            }
-            
-        }
-
 
         p {
             font-size: .8125rem;

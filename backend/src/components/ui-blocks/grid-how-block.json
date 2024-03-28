@@ -1,16 +1,16 @@
 {
-  "collectionName": "components_ui_blocks_features_rows",
+  "collectionName": "components_ui_blocks_grid_how_blocks",
   "info": {
-    "displayName": "Features Row",
+    "displayName": "GridHowBlock",
     "icon": "apps",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "feature": {
+    "Content": {
       "type": "component",
       "repeatable": true,
-      "component": "ui-components.feature"
+      "component": "ui-components.grid-how-block"
     },
     "title": {
       "type": "string"

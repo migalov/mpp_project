@@ -1179,13 +1179,32 @@ export interface ApiLandingModel1LandingModel1 extends Schema.CollectionType {
     singularName: 'landing-model-1';
     pluralName: 'landing-model-1s';
     displayName: 'Landing Model 1';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    Content: Attribute.DynamicZone<
+      [
+        'ui-blocks.reviews-row',
+        'ui-blocks.faq-items',
+        'ui-components.offer-to-purchase',
+        'ui-blocks.banner',
+        'ui-blocks.grid-how-block',
+        'ui-blocks.features-row'
+      ]
+    >;
+    seoText: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'standard';
+        }
+      >;
     title: Attribute.String;
-    src: Attribute.String;
+    slug: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

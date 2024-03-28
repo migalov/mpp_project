@@ -1,0 +1,73 @@
+---
+const { title, content } = Astro.props;
+---
+
+<section class="mpp-how">
+    <h2>{title}</h2>
+    <ol class="mpp-how-grid">
+        {
+            content.map(item => 
+                <li style={item.bgColor !== null && `background-color: ${item.bgColor}`} class="mpp-how-grid-item" set:html={item.body}></li>
+            )
+        }  
+    </ol>
+</section>
+
+<style lang="scss">
+    .mpp-how {
+        
+        & h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 0 0 1em;
+        }
+
+    }
+    .mpp-how-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        @media (min-width: 768px) {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 2rem;
+        }
+        
+        list-style-position: inside;
+        list-style-type: none; /* Убираем исходные маркеры */
+        counter-reset: my-counter; /* Задаём имя счетчика */
+
+    }
+
+    .mpp-how-grid-item {
+        padding: 0.1rem 2rem;
+        border-radius: 15px;
+        
+        @media (min-width: 768px) {
+            aspect-ratio: 1 / 1;
+        }
+        &::before {
+            content: counter(my-counter); /* Выводим число */
+            counter-increment: my-counter; /* Увеличиваем значение счётчика */
+            font-size: 4rem;
+
+            font-weight: 500;
+            margin: 0 10px 0 0;
+        }
+
+        &:last-child {
+            background-color: rgba(248, 113, 76, .4);
+        }
+        
+    }
+</style>
+
+<style is:global lang="scss">
+    .mpp-how-grid-item {
+        & h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+    }
+</style>

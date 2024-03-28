@@ -4,17 +4,37 @@
   "info": {
     "singularName": "landing-model-1",
     "pluralName": "landing-model-1s",
-    "displayName": "Landing Model 1"
+    "displayName": "Landing Model 1",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
+    "Content": {
+      "type": "dynamiczone",
+      "components": [
+        "ui-blocks.reviews-row",
+        "ui-blocks.faq-items",
+        "ui-components.offer-to-purchase",
+        "ui-blocks.banner",
+        "ui-blocks.grid-how-block",
+        "ui-blocks.features-row"
+      ]
+    },
+    "seoText": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
     "title": {
       "type": "string"
     },
-    "src": {
+    "slug": {
       "type": "string"
     }
   }
